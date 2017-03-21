@@ -3,26 +3,49 @@
 import chess
 import MontecarloTreeSearch as Monte
 
-board = chess.Board()
+MaxGameNum = 100
+boardList = [0 * 1 for i in range(100)]
+CountGame = 0
+MainBoard = chess.Board()
 
-def startBoard():
-    board = chess.Board()
+def NewBoard():
+    if(CountGame== MaxGameNum):
+        print("플레이 가능한 횟수를 초과하엿습니다.")
+    else:
+        boardList[CountGame] = chess.Board()
+        MainBoard = boardList[CountGame]
+        Countgame = counting(CountGame)
+
+def counting(count) :
+    return count + 1
 
 def push(str):
-    board.push_san(str)
+    MainBoard.push_san(str)
 
-startBoard()
+def UI_Intro() :
+    print("WelCome DeepPurple")
 
-while(True):
-    print(board)
+def UI_start() :
+    print("Press any Key to continue")
 
-    #print(board.turn) # true 는 white false 는 black
-    if (board.turn):
-        choice = input("white choice ( exit = 0 ) : ")
-    else :
-        choice = input("black choice ( exit = 0 ) : ")
+def play() :
+    while(True):
+        print(MainBoard)
 
-    if (choice == 0) :
-        break
-    else :
-        board.push_san(choice)#
+        #print(board.turn) # true 는 white false 는 black
+        if (MainBoard.turn):
+            choice = input("white choice ( exit = 0 ) : ")
+        else :
+            choice = input("black choice ( exit = 0 ) : ")
+
+        if (choice == "0") :
+            print("bye")
+            break
+        else :
+            MainBoard.push_san(choice)
+
+
+# 소스 구동
+
+NewBoard()
+play()
