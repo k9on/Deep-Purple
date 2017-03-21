@@ -1,7 +1,7 @@
 #체스게임 플레이
 
 import chess
-import MontecarloTreeSearch as Monte
+import MontecarloTreeSearch as AI
 
 MaxGameNum = 100
 boardList = [0 * 1 for i in range(100)]
