@@ -25,4 +25,4 @@ while(True):
     if (choice == 0) :
         break
     else :
-        board.push_san(choice)
+        board.push_san(choice)#
