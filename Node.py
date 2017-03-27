@@ -1,6 +1,8 @@
 
 
 class Node:
+
+
     def __init__(self): # 독립적인 노드 생성할 때 ex) root Node 만들 때
         self.command = None  # 명령어
         self.score = 0  # 초기 스코어
@@ -29,13 +31,16 @@ class Node:
             else:
                 return False # 있으면 False
 
+
     def make_Child(self, children): # legal moves를 배열로 받음 -> children
         #가치망에 따른 결과로 / 대략 알파-베타 프루닝
         #자식노드를 생성할지 판단
 
+
         while(len(children)!=0):
             self.child.append(children.pop())
             self.child_num = self.child_num + 1
+
 
     def get_Parent(self):
         return self.parent
@@ -49,4 +54,11 @@ class Node:
 
     def get_Command(self):
         return self.command
+    def set_Win(self, win):
+        self.win = win
+    def set_Draw(self,draw):
+        self.draw= draw
+    def set_lose(self, lose):
+        self.lose = lose
+
 
