@@ -13,7 +13,9 @@ class Tree:
     def go_next_node(self, node):
         # 이전 노드를 None 처리 하고 다음 순서node로 이동
         if (self.currentNode.bear_Flag == False):  # 자식을 낳은 경험이 없다면
-            self.chess_board_strack
+            commands = self.currentNode.synthesize_Commands() # 명령어를 종합
+            self.chess_board_strack.all_push_one(commands) # 종합된 명령어 배열을 한번에 푸쉬
+            self.chess_board_strack.realize_Board()
             self.currentNode.make_Child()
 
         return  # Node
