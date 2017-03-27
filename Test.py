@@ -2,25 +2,13 @@ a = [ 0 * 1 for i in range(100)]
 
 import chess
 
+board1 = chess.Board()
 
-b = chess.Board()
-#b.push_san("e4")
-print(b)
-c1 = b.copy()
-c = c1.__repr__()
-for i in range(7,len(c)):
-    print(i,c[i])
+print(board1)
 
-c2 = c[7:]
+board2 = board1.copy()
 
+board2.push_san("e3")
 
-print(c2)
-
-c3 = c[:-14]
-c4 = c[:-15]
-print(c3)
-print(c4)
-
-c5 = c[7:-15]
-
-print(c5)
+print(board1)
+print(board2)

@@ -36,6 +36,20 @@ class Node:
             else:
                 return False # 있으면 False
 
+    def synthesize_Commands(self): # root노드로 부터 현재 노드까지 스택에 넣을 명령어를 종합함
+        temp = self # 현재노드
+        commands = []
+        while(temp.parent != None): # 부모가 있는 동안만
+            commands.append(temp.get_Command()) # commands에 노드의 명령어를 담음
+            temp = temp.parent # temp에 부모를 갱신
+            # 계속 반복하다가 temp가 root노드가 되면 끝
+
+        return commands # 종합된 명령어 배열들을 리턴.
+                        #  단, 명령어가 최근순으로 들어갔음으로 뺄 때는 스택으로
+
+
+
+
 
     def make_Child(self, children): # legal moves를 배열로 받음 -> children
         #가치망에 따른 결과로 / 대략 알파-베타 프루닝
@@ -47,8 +61,6 @@ class Node:
             self.child_num = self.child_num + 1
 
 
-    def get_Parent(self):
-        return self.parent
 
     def update_Score(self, score):
         self.score = self.score + score
