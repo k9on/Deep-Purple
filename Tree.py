@@ -7,6 +7,17 @@ class Tree:
         self.currentNode #현재 가리키는 노드를 임시로 저장
         self.chess_board_stack #트리에서 노드를 입력 받는보드스택
 
+    def set_penalty(self, penalty):  # 패널티를 설정함
+        self.penalty = penalty
+
+    def go_next_node(self, node):
+        # 이전 노드를 None 처리 하고 다음 순서node로 이동
+        if (self.currentNode.bear_Flag == False):  # 자식을 낳은 경험이 없다면
+            self.chess_board_strack
+            self.currentNode.make_Child()
+
+        return  # Node
+
     def set_Board(self,board_stack):
         self.chess_board_strack = board_stack.copy
 
@@ -21,7 +32,3 @@ class Tree:
         #게임종료 여부와 승패정보 반환
         return
  #   def backpropation(self, Node):
-
-    def go_next_node(self,node):
-        #이전 노드를 None 처리 하고 다음 순서node로 이동
-        return #Node
