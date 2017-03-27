@@ -2,7 +2,7 @@ import Node
 
 class Tree:
     def __init__(self):
-        self.root_Node
+        self.root_Node #
         self.penalty
         self.currentNode #현재 가리키는 노드를 임시로 저장
         self.chess_board_stack #트리에서 노드를 입력 받는보드스택
