@@ -1,4 +1,5 @@
 import Node
+import Board_Stack.py as BS
 
 class Tree:
     def __init__(self):
@@ -20,13 +21,6 @@ class Tree:
 
         return  # Node
 
-    def set_Board(self,board_stack):
-        self.chess_board_strack = board_stack.copy
-
-    def get_Board(self, node):
-        #node의 루트노드까지 거슬러 올라가
-        #루트노드부터 node까지 명령어를 체스 보드로 반환
-        return self.chess_board_strack
     def is_done(self):
         #현재 노드에서 게임 종료 확인
         return #
