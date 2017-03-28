@@ -1,3 +1,5 @@
+import Tree
+import Node
 '''
 MCTS(Monte Calro Tree Search)
 
@@ -12,27 +14,17 @@ class Monte:
     def __init__(self):
         self.tree
 
-    #def init_Monte(self):
+    def asking(self, board):
+        solution = str() # 가장 좋은수
+        root = self.tree.Play_Tree(board) # 트리한테 결과트리의 루트를 반환
+        children = root.get_AllChild() # 루트로 부터 모든 legal child를 반환
+        if(len(children)==0):
+            print("가능한 수가 없음")
+            solution = "0"
+        else:
+            solution = self.decide_BestMove(children)
+        return solution
 
-    def set_Board(self, board):
-        #몬테카를로 트리탐색 시작 전 현재 체스 보드 저장
-        self.present_board= board.copy()
-
-    #def monteCarloTreeSearch(self, node, player):
-'''
-        for i in range(100):주어진 시뮬레이션 횟수
-            while 게임 종료 여부:
-                다음 노드를 선택하는 확장 진행
-
-                 현재 선택한 노드가 처음 선택된 노드일 경우에
-
-                 시뮬레이션을 시작한 노드가 어딘지 알기 위해 기록
-
-                 턴 넘김 swap player
-            역전파 backbpropagation
-
-        가장 좋은 수를 반환
-'''
-    #def get_BestMove(self):
-
-
+    def decide_BestMove(self, children):
+        '''가장 좋은 수 추출'''
+        return children[0].command
