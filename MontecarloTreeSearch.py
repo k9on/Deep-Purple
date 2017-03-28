@@ -10,8 +10,6 @@ MCTS(Monte Calro Tree Search)
 
 class Monte:
     def __init__(self):
-        self.board_stack
-        self.present_board
         self.tree
 
     #def init_Monte(self):
