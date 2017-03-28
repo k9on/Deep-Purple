@@ -3,12 +3,10 @@ a = [ 0 * 1 for i in range(100)]
 import chess
 
 board1 = chess.Board()
+board1.push_san("e3")
+moves = board1.legal_moves
 
-print(board1)
+print(moves)
 
-board2 = board1.copy()
+print(type(moves))
 
-board2.push_san("e3")
-
-print(board1)
-print(board2)
