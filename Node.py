@@ -4,6 +4,7 @@ class Node:
 
     def __init__(self): # 독립적인 노드 생성할 때 ex) root Node 만들 때
      #   self.command = None  # 명령어
+        self.MainBaord =''
         self.boardStack # chess.Board의 입력 을
         self.score = 0  # 초기 스코어
         self.visit = 0  # 방문횟수
@@ -19,7 +20,8 @@ class Node:
         # 다음 노드로 탐색 대상을 옮겨야 함으로 두 노드의 구별이 필요하기 때문에 Flag를 쓸 필요가 있음
 
     def __init__(self, parent, chess_Board):  # 독립적인 노드 생성할 때 ex) root Node 만들 때
-        #   self.command = None  # 명령어
+        #  self.command = None  # 명령어
+        self.MainBoard = ''
         self.boardStack = chess_Board.copy()  # chess.Board의 입력 을
         self.score = 0  # 초기 스코어
         self.visit = 0  # 방문횟수
@@ -63,5 +65,15 @@ class Node:
 
     def get_BoardStack(self):
         return self.boardStack
+    def get_AllChild(self): #모든 자식 노드를 반환
+        childList = [] #모든 자식 노드를 받을 배열
+
+        while len(self.child_num) != 0 :
+            childList.append(self.child.pop())
+
+        return childList # 자식 노드를 반환
+    def add_ChildNode(self, node):
+        self.child.append(node)
+
 
 
