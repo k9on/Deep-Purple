@@ -3,9 +3,8 @@ import chess
 
 class Board_Stack():
     def __init__(self):
-        self.main_board = chess.Board
         self.BoardStack = []
-        self.temp_board = chess.Board
+        self.temp_board
 
 
     def set_mainBoard(self, inputBoard): #boardStack변수를 갱신
