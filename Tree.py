@@ -39,24 +39,12 @@ class Tree:
 
         root.board = board(str) # board는 chess.board 임.
 
+        root.root = True #내가 루트다.
+
         root.list = MLM.MovesMaker.make(board.legal_moves) # 가능한 수를 리스트로 갖자.
 
         return self.make_nodes(root)
-    #
-    # def make_tree(self, root):
-    #     '''
-    #
-    #     :param root:
-    #     :return root:
-    #     '''
-    #
-    #     while True:
-    #
-    #
-    #
-    # 
-    #
-    #     return root
+
 
     def make_node(self):
         '''
@@ -66,46 +54,53 @@ class Tree:
         node = Node.Node()
         return node
 
-    def make_nodes(self, parent):
+    def make_nodes(self, present):
         '''
-        자식이 있으면 노드를 만들어서 반환해줘.
+        내가 자식이 있으면 노드를 만들고, 자식이 없으면 부모한테 내 형제를 있는지묻고,
+        내 형제가 있으면 그 형제가 위 행동을 반복한다.
+        반복하다 현재상태의 부모가 root면 root를 반환해라.
         :param  parent는 Node:
         :return:
         '''
 
 
-        if len(parent.list) != 0: #자식리스트가 있다! 그러면 리스트만큼 노드 만들어서 잇자
-            list = parent.list
+        if len(present.list) != 0: #legalmoves가 있다! 그러면 리스트만큼 자식 노드 만들어서 잇자
+            #list = parent.list
             while len(list) != 0:
-                command = list.pop(0) #리스트중 첫번째 명령어 뺴기
+                command = (present.list).pop(0) #리스트중 첫번째 가능한 수 빼기
                 node = self.make_node() #노드 만들기
-                node.parent = parent    #부모랑 자식하고 잇기
-                (parent.child).append(node) #부모에 자식추가하기 #원본리스트
-                (parent.temp_child).append(node)    #다음 자식 따라갈때 쓸 사본 리스트
+                node.parent = present    #부모랑 자식하고 잇기
+                (present.child).append(node) #부모에 자식추가하기 #원본리스트
+                (present.temp_child).append(node)    #다음 자식 따라갈때 쓸 사본 리스트
                 node.command = command #노드에 커맨드 저장
 
 
                 #부모의 보드를 받아서 지금 현재 노드에 갱신된 노트판을 string으로 추가 *메모리감소효과
-                chess_board = chess.Board(parent.board)
+                chess_board = chess.Board(present.board)
                 chess_board.push_san(command)
                 node.board = chess_board.board(str)
                 #현재 노드판에서 가능한수 뽑아서 리스트에 저장
                 node.list = MLM.MovesMaker.make(chess_board.legal_moves)
+                present.bear_Flag = True #자식 만든 경험있소
 
+            return self.make_nodes(present.child[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
 
-            return self.make_nodes(node)
+        if present.bear_Flag == True: #첫번재 자식노드의 자손들 다 만든후, 부모로 거슬러올라와서 두번째 자식노드가 있는지 보러 갑시다.
+            if len(present.temp_child) != 1:
+                node = (present.temp_child).pop(1)  # 자식하나 빼서 노드만들러 갑시다.
+                return self.make_nodes(node)
 
-        else : #리스트가 없으면 다음 자식으로 이동
+        if len(present.list) == 0 : #legalmoves가 없으면 다음 자식으로 이동
 
-            if len(parent.temp_child) != 0: #다음 자식이 있으면
-                node = (parent.temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
+            if len((present.parent).temp_child) != 1: #부모한테 다음 자식이 있으면
+                node = ((present.parent).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
                 return self.make_nodes(node)
 
             else : #    다음 자식이 없으면
-                if parent.parent == parent.root: #그런데 자기 부모가 root면 root를 반환해라
-                    return parent.root
+                if (present.parent).root == True : #그런데 자기 부모가 root면 root를 반환해라
+                    return present.root
 
-                return self.make_nodes(parent.parent) #자기 부모가 root가 아니면 부모로 가라.
+                return self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
 
 
 

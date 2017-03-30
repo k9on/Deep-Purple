@@ -15,6 +15,7 @@ class Node:
         self.temp_child = [] #자식 노드 사본
         self.board = None # 체스판
         self.list = [] #legalmoves
+        self.root = None # 루트인지 확인
         #NOH
         self.parent = None  # 부모노드
         self.bear_Flag = False  # 한번 자식노드를 낳았으면, 낳았었다는 표시
