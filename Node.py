@@ -1,4 +1,4 @@
-
+from copy import deepcopy
 
 class Node:
 
@@ -74,13 +74,74 @@ class Node:
     def get_Score(self):
         return self.score
 
+    def set_Command(self, command):
+        self.command = command
+
     def get_Command(self):
         return self.command
+
     def set_Win(self, win):
         self.win = win
+
+    def get_Win(self, win):
+        return self.win
+
     def set_Draw(self,draw):
         self.draw= draw
+
+    def get_Draw(self,draw):
+        return self.draw
+
     def set_lose(self, lose):
         self.lose = lose
 
+    def get_lose(self, lose):
+        return self.lose
 
+    def set_Visit(self, visit):
+        self.visit = visit
+
+    def get_Visit(self):
+        return self.visit
+
+    def set_Child(self, child):
+        self.child = deepcopy(child)
+
+    def get_Child(self):
+        return self.child
+
+    def set_Temp_child(self, child):
+        self.child = deepcopy(child)
+
+    def get_Temp_child(self, child):
+        return self.temp_child
+
+    def set_Board(self, board):
+        self.board = board
+
+    def get_Board(self):
+        return self.board
+
+    def set_List(self, list):
+        self.list = deepcopy(list)
+
+    def get_List(self):
+        return self.list
+
+    def set_Root(self, root):
+        self.root = root
+
+    def get_Root(self):
+        return self.root
+
+    def set_Parent(self, parent):
+        self.parent = parent
+
+    def get_Parent(self):
+        return self.parent
+
+    def set_Bear_Flag(self, bear_Flag):
+        self.bear_Flag = bear_Flag
+
+    def get_Bear_Flag(self):
+        return self.bear_Flag

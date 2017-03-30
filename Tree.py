@@ -23,7 +23,7 @@ class Tree:
 
         #return  # Node
 
-    def play_tree(self, board):
+    def play_tree(self, str):
         '''
         board는 Chess.Board
         board에서 받는것을 리스트로 변경하자.
@@ -34,7 +34,9 @@ class Tree:
 
         root = self.make_node()
 
-        root.board = board(str) # board는 chess.board 임.
+        board = chess.Board(str)
+
+        root.board = chess.Board(str) # board는 chess.board 임.
 
         root.root = True #내가 루트다.
 
@@ -62,14 +64,13 @@ class Tree:
 
 
         if len(present.list) != 0: #legalmoves가 있다! 그러면 리스트만큼 자식 노드 만들어서 잇자
-            #list = parent.list
-            while len(list) != 0:
+            while len(present.list) != 0:
                 command = (present.list).pop(0) #리스트중 첫번째 가능한 수 빼기
                 node = self.make_node() #노드 만들기
-                node.parent = present    #부모랑 자식하고 잇기
+                node.set_Parent(present)    #부모랑 자식하고 잇기
                 (present.child).append(node) #부모에 자식추가하기 #원본리스트
                 (present.temp_child).append(node)    #다음 자식 따라갈때 쓸 사본 리스트
-                node.command = command #노드에 커맨드 저장
+                node.set_Command(command) #노드에 커맨드 저장
 
 
                 #부모의 보드를 받아서 지금 현재 노드에 갱신된 노트판을 string으로 추가 *메모리감소효과
@@ -80,60 +81,61 @@ class Tree:
                 node.list = MLM.MovesMaker.make(chess_board.legal_moves)
                 present.bear_Flag = True #자식 만든 경험있소
 
-            return self.make_nodes(present.child[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
+            self.make_nodes(present.child[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
 
         # 자식을 만든 경험이 있는데 자식중 하나가 트리를 완성해서 다음 자식으로 갈때 조건을 어떻게 할것인가!?
         elif present.bear_Flag == True: #첫번재 자식노드의 자손들 다 만든후, 부모로 거슬러올라와서 두번째 자식노드가 있는지 보러 갑시다.
             if len(present.temp_child) > 1:
                 node = (present.temp_child).pop(1)  # 자식하나 빼서 노드만들러 갑시다.
-                return self.make_nodes(node)
+                self.make_nodes(node)
 
         else : #legalmoves가 없으면 다음 자식으로 이동
             # 자식을 만든 경험이 없고, 먼저 트리만들었던 형제가 리스트가 없었을때,
 
             if len((present.parent).temp_child) > 1: #부모한테 다음 자식이 있으면
                 node = ((present.parent).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
-                return self.make_nodes(node)
+                self.make_nodes(node)
 
             else : #    다음 자식이 없으면
                 if (present.parent).root == True : #그런데 자기 부모가 root면 root를 반환해라
-                    return present.root
+                    return (present.parent).root
 
-                return self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
+                self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
 
-    def tree_search(self, node):
-        '''
-        
-        :param node: 
-        :return: 
-        '''
-        # 원본리스트를 사본에 복사
-        node.temp_child = deepcopy(node.child)
-
-        if node.visit < 1: #처음 방문이면
-            if len(node.child) > 0:
-                #자식이 있으면
-                #자식중 첫쨰부터
-                (node.child[0]).visit += 1
-                return self.tree_search(node.child[0])
-
-            else :
-                #자식이 없으면 다음 형제가 있는지
-                if len((node.parent).temp_child) > 1:
-                    #있으면
-                    node = (node.parent).temp_child.pop(1)
-                    return self.tree_search(node)
-
-                else:
-                    #형제도 없으면 부모가 루트인지 확인해
-                    if node.parent == node.root:
-                        return #빠져나오자.
-                    else :
-                        #부모가 root아니면 부모한테 가자.
-                        return self.tree_search(node.parent)
-        else:
-            #방문 들렸으면 첫번째 자식은 들렸다는건데
-
+    # def tree_search(self, node):
+    #     '''
+    #
+    #     :param node:
+    #     :return:
+    #     '''
+    #     # 원본리스트를 사본에 복사
+    #     node.temp_child = deepcopy(node.child)
+    #
+    #     if node.visit < 1: #처음 방문이면
+    #         if len(node.temp_child) > 1:
+    #             #자식이 있으면
+    #             #자식중 첫쨰부터
+    #             (node.child[0]).visit += 1
+    #             return self.tree_search(node.child[0])
+    #
+    #         else :
+    #             #자식이 없으면 다음 형제가 있는지
+    #             if len((node.parent).temp_child) > 1:
+    #                 #있으면
+    #                 node = (node.parent).temp_child.pop(1)
+    #                 return self.tree_search(node)
+    #
+    #             else:
+    #                 #형제도 없으면 부모가 루트인지 확인해
+    #                 if node.parent == node.root:
+    #                     return #빠져나오자.
+    #                 else :
+    #                     #부모가 root아니면 부모한테 가자.
+    #                     return self.tree_search(node.parent)
+    #     else:
+    #         #방문 횟수가 1이상이면 첫번째 자식은 들렸다는건데
+    #         if len(node.temp_child) >1:
+    #             #방문할 다음
 
 
     def is_done(self):

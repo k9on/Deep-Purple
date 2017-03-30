@@ -36,27 +36,48 @@ p p p p . Q p p
 P P P P . P P P
 R N B . K . N R
 
->>> board.is_stalemate()
+
+#######################################################################################################################
+###################################### 게임 오버 상태 체크 ############################################################
+>>> board.is_stalemate() # 교착상태인지 아닌지, 교착상태이면 게임이 승자없이 무승부로 끝남
 False
->>> board.is_insufficient_material()
+>>> board.is_insufficient_material() # 재료가 부족함? 말이 부족해서 교착상태는 아니나, 체크메이트 상황으로 이끌 수 있는 수준
 False
->>> board.is_game_over()
+>>> board.is_game_over() # 게임이 끝났는지 아닌지 
 True
 
->>> board.can_claim_threefold_repetition()
+
+#######################################################################################################################
+################################ 무승부 상황을 체크 ###################################################################
+>>> board.can_claim_threefold_repetition() # 상중반복이 주장가능한가? 체스 룰상으로 3중반복이 일어나면 무승부를 주장할 수 있다.
 False
->>> board.halfmove_clock
+
+규칙의 내용은 위와 같이 '정확히 같은 상황이 3번 반복되어 나타났거나 나타나려고 할 때 /
+해당 차례의 경기자가 무승부를 선언할 수 있다'는 것입니다. 자동으로 무승부가 되는 건 아니며 상황이 3번 이상
+반복된 후 경기자가 자기 차례에 무승부를 선언할 권리가 있다는 것입니다. 반드시 연속적인 수로 나타나야 하는 것은 아닙니다. 
+
+
+>>> board.halfmove_clock 
 0
+
 >>> board.can_claim_fifty_moves()
 False
 >>> board.can_claim_draw()
 False
+
+
+#######################################################################################################################
+2014 년 7 월의 새로운 규칙에 따라 5 배의 반복이 발생하거나 전당포 푸시 또는 캡처없이 75 개의 이동이있는 경우 게임이 종료됩니다
+(소유권 주장 없이도). 게임을 종료하는 다른 방법이 우선합니다.
+
 
 >>> board.is_fivefold_repetition()
 False
 
 >>> board.is_seventyfive_moves()
 False
+########################################################################################################################
+#####################################Detects checks and attacks.########################################################
 
 >>> board.is_check()
 True
@@ -78,7 +99,9 @@ True
 . . . . . . . .
 . . . . . . 1 .
 . . . . . . 1 .
-Parses and creates SAN representation of moves.
+
+#######################################################################################################################
+########################Parses and creates SAN representation of moves.################################################
 
 >>> board = chess.Board()
 
@@ -90,7 +113,9 @@ Move.from_uci('g1f3')
 
 >>> board.variation_san([chess.Move.from_uci(m) for m in ["e2e4", "e7e5", "g1f3"]])
 '1. e4 e5 2. Nf3'
-Parses and creates FENs, extended FENs and Shredder FENs.
+
+#######################################################################################################################
+#######################Parses and creates FENs, extended FENs and Shredder FENs.#######################################
 
 >>> board.fen()
 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
@@ -99,7 +124,9 @@ Parses and creates FENs, extended FENs and Shredder FENs.
 >>> board = chess.Board("8/8/8/2k5/4K3/8/8/8 w - - 4 45")
 >>> board.piece_at(chess.C5)
 Piece.from_symbol('k')
-Parses and creates EPDs.
+
+########################################################################################################################
+##########################################Parses and creates EPDs.######################################################
 
 >>> board = chess.Board()
 >>> board.epd(bm=board.parse_uci("d2d4"))
@@ -108,9 +135,13 @@ Parses and creates EPDs.
 >>> ops = board.set_epd("1k1r4/pp1b1R2/3q2pp/4p3/2B5/4Q3/PPP2B2/2K5 b - - bm Qd1+; id \"BK.01\";")
 >>> ops == {'bm': [chess.Move.from_uci('d6d1')], 'id': 'BK.01'}
 True
-Detects absolute pins and their directions.
 
-Read Polyglot opening books. Docs.
+########################################################################################################################
+############################Detects absolute pins and their directions.#################################################
+
+
+########################################################################################################################
+###################################Read Polyglot opening books. Docs.###################################################
 
 >>> import chess.polyglot
 
@@ -126,7 +157,9 @@ Move.from_uci('e2e4')
 0
 
 >>> book.close()
-Read and write PGNs. Supports headers, comments, NAGs and a tree of variations. Docs.
+
+########################################################################################################################
+#############Read and write PGNs. Supports headers, comments, NAGs and a tree of variations. Docs.######################
 
 >>> import chess.pgn
 
@@ -163,8 +196,14 @@ Nd3#
 
 >>> first_game.headers["Result"]
 '0-1'
+
+
+
+########################################################################################################################
 Probe Gaviota endgame tablebases (DTM, WDL). Docs.
 
+
+########################################################################################################################
 Probe Syzygy endgame tablebases (DTZ, WDL). Docs.
 
 >>> import chess.syzygy
@@ -178,7 +217,9 @@ Probe Syzygy endgame tablebases (DTZ, WDL). Docs.
 -53
 
 >>> tablebases.close()
-Communicate with an UCI engine. Docs.
+
+########################################################################################################################
+####################################Communicate with an UCI engine. Docs.###############################################
 
 >>> import chess.uci
 

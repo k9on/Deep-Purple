@@ -1,3 +1,5 @@
+import chess
+
 class MovesMaker:
     def make(self, str):
         start = str.find("(") # ( 이 시작하는 위치 반환
@@ -6,3 +8,9 @@ class MovesMaker:
 
         return temp
 
+
+board = chess.Board()
+str = str(board.legal_moves)
+MM = MovesMaker()
+
+print(MM.make(str))
