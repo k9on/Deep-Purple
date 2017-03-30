@@ -1,8 +1,8 @@
 import Node
-import MakeLegalMoves as MLM
+from MakeLegalMoves import make
 import chess
 from copy import deepcopy
-
+from GetBoardString import get_BoardString as GB
 
 class Tree:
     def __init__(self):
@@ -23,9 +23,9 @@ class Tree:
 
         #return  # Node
 
-    def play_tree(self, str):
+    def play_tree(self, board):
         '''
-        board는 Chess.Board
+        board는 Chess.Board를 str으로 변환한 것 
         board에서 받는것을 리스트로 변경하자.
         root노드는 만들어서 make_tree에 주자.
         :param board:
@@ -34,13 +34,26 @@ class Tree:
 
         root = self.make_node()
 
-        board = chess.Board(str)
 
-        root.board = chess.Board(str) # board는 chess.board 임.
 
-        root.root = True #내가 루트다.
+        root.board = board # board는 chess.board 임.
 
-        root.list = MLM.MovesMaker.make(board.legal_moves) # 가능한 수를 리스트로 갖자.
+        temp = chess.Board(board)
+
+        legal = temp.legal_moves
+
+        legal = str(legal)
+
+        legal = make(legal)
+
+        root.set_List(legal)
+
+        root.set_Root(True) #내가 루트다.
+
+
+
+
+        # root.set_List(MLM.make((chess.Board(tmpstr)).legal_moves)) # 가능한 수를 리스트로 갖자.
 
         return self.make_nodes(root)
 
@@ -50,7 +63,7 @@ class Tree:
         노드 한개 만들어줭
         :return node:
         '''
-        node = Node.Node()
+        node = Node.node()
         return node
 
     def make_nodes(self, present):
@@ -74,31 +87,46 @@ class Tree:
 
 
                 #부모의 보드를 받아서 지금 현재 노드에 갱신된 노트판을 string으로 추가 *메모리감소효과
-                chess_board = chess.Board(present.board)
-                chess_board.push_san(command)
-                node.board = chess_board.board(str)
-                #현재 노드판에서 가능한수 뽑아서 리스트에 저장
-                node.list = MLM.MovesMaker.make(chess_board.legal_moves)
-                present.bear_Flag = True #자식 만든 경험있소
+                chess_board = chess.Board(present.get_Board())
+                command = str(command)
+                print(command, type(command))
 
-            self.make_nodes(present.child[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
+                chess_board.push_san(command)
+
+                node.set_Board(GB(chess_board))
+                #현재 노드판에서 가능한수 뽑아서 리스트에 저장
+
+                temp = chess.Board(GB(chess_board))
+
+                legal = temp.legal_moves
+
+                legal = str(legal)
+
+                legal = make(legal)
+
+                node.set_List(legal)
+
+                # node.set_List(MLM.make(chess_board.legal_moves))
+                present.set_Bear_Flag(True)#자식 만든 경험있소
+
+            self.make_nodes((present.get_Child())[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
 
         # 자식을 만든 경험이 있는데 자식중 하나가 트리를 완성해서 다음 자식으로 갈때 조건을 어떻게 할것인가!?
         elif present.bear_Flag == True: #첫번재 자식노드의 자손들 다 만든후, 부모로 거슬러올라와서 두번째 자식노드가 있는지 보러 갑시다.
-            if len(present.temp_child) > 1:
-                node = (present.temp_child).pop(1)  # 자식하나 빼서 노드만들러 갑시다.
+            if len(present.get_Temp_child()) > 1:
+                node = (present.get_Temp_child()).pop(1)  # 자식하나 빼서 노드만들러 갑시다.
                 self.make_nodes(node)
 
         else : #legalmoves가 없으면 다음 자식으로 이동
             # 자식을 만든 경험이 없고, 먼저 트리만들었던 형제가 리스트가 없었을때,
 
-            if len((present.parent).temp_child) > 1: #부모한테 다음 자식이 있으면
-                node = ((present.parent).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
+            if len((present.get_Parent()).temp_child) > 1: #부모한테 다음 자식이 있으면
+                node = ((present.get_Parent()).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
                 self.make_nodes(node)
 
             else : #    다음 자식이 없으면
-                if (present.parent).root == True : #그런데 자기 부모가 root면 root를 반환해라
-                    return (present.parent).root
+                if (present.get_Parent()).root == True : #그런데 자기 부모가 root면 root를 반환해라
+                    return (present.get_Parent()).root
 
                 self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
 
