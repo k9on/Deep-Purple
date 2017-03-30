@@ -105,7 +105,7 @@ class Tree:
                 if parent.parent == parent.root: #그런데 자기 부모가 root면 root를 반환해라
                     return parent.root
 
-                return self.make_nodes(parent) #자기 부모가 root가 아니면 부모로 가라.
+                return self.make_nodes(parent.parent) #자기 부모가 root가 아니면 부모로 가라.
 
 
 
