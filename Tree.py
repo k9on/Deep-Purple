@@ -1,17 +1,14 @@
 import Node
-import Board_Stack.py as BS
 import MakeLegalMoves as MLM
 import chess
+from copy import deepcopy
 
-
-#test
 
 class Tree:
     def __init__(self):
-      # self.root_Node #
-        self.penalty
-        self.currentNode # 현재 가리키는 노드를 임시로 저장
-        self.chess_board_stack # 트리에서 노드를 입력 받는보드스택
+        self.penalty = 0
+        #self.currentNode # 현재 가리키는 노드를 임시로 저장
+        self.chess_board_stack = None# 트리에서 노드를 입력 받는보드스택
 
     def set_penalty(self, penalty):  # 패널티를 설정함
         self.penalty = penalty
@@ -24,7 +21,7 @@ class Tree:
     #         self.chess_board_strack.realize_Board()
     #         self.currentNode.make_Child()
 
-        return  # Node
+        #return  # Node
 
     def play_tree(self, board):
         '''
@@ -85,14 +82,16 @@ class Tree:
 
             return self.make_nodes(present.child[0]) #자식중 첫번째 놈이 새로운 트리만들러 긔긔
 
-        if present.bear_Flag == True: #첫번재 자식노드의 자손들 다 만든후, 부모로 거슬러올라와서 두번째 자식노드가 있는지 보러 갑시다.
-            if len(present.temp_child) != 1:
+        # 자식을 만든 경험이 있는데 자식중 하나가 트리를 완성해서 다음 자식으로 갈때 조건을 어떻게 할것인가!?
+        elif present.bear_Flag == True: #첫번재 자식노드의 자손들 다 만든후, 부모로 거슬러올라와서 두번째 자식노드가 있는지 보러 갑시다.
+            if len(present.temp_child) > 1:
                 node = (present.temp_child).pop(1)  # 자식하나 빼서 노드만들러 갑시다.
                 return self.make_nodes(node)
 
-        if len(present.list) == 0 : #legalmoves가 없으면 다음 자식으로 이동
+        else : #legalmoves가 없으면 다음 자식으로 이동
+            # 자식을 만든 경험이 없고, 먼저 트리만들었던 형제가 리스트가 없었을때,
 
-            if len((present.parent).temp_child) != 1: #부모한테 다음 자식이 있으면
+            if len((present.parent).temp_child) > 1: #부모한테 다음 자식이 있으면
                 node = ((present.parent).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
                 return self.make_nodes(node)
 
@@ -102,6 +101,38 @@ class Tree:
 
                 return self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
 
+    def tree_search(self, node):
+        '''
+        
+        :param node: 
+        :return: 
+        '''
+        # 원본리스트를 사본에 복사
+        node.temp_child = deepcopy(node.child)
+
+        if node.visit < 1: #처음 방문이면
+            if len(node.child) > 0:
+                #자식이 있으면
+                #자식중 첫쨰부터
+                (node.child[0]).visit += 1
+                return self.tree_search(node.child[0])
+
+            else :
+                #자식이 없으면 다음 형제가 있는지
+                if len((node.parent).temp_child) > 1:
+                    #있으면
+                    node = (node.parent).temp_child.pop(1)
+                    return self.tree_search(node)
+
+                else:
+                    #형제도 없으면 부모가 루트인지 확인해
+                    if node.parent == node.root:
+                        return #빠져나오자.
+                    else :
+                        #부모가 root아니면 부모한테 가자.
+                        return self.tree_search(node.parent)
+        else:
+            #방문 들렸으면 첫번째 자식은 들렸다는건데
 
 
 
