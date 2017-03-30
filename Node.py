@@ -11,7 +11,11 @@ class Node:
         self.draw = 0  # 무
         self.lose = 0  # 패
         self.child = []  # 자식 노드
-        self.child_num = 0
+        #NOH
+        self.temp_child = [] #자식 노드 사본
+        self.board = None # 체스판
+        self.list = [] #legalmoves
+        #NOH
         self.parent = None  # 부모노드
         self.bear_Flag = False  # 한번 자식노드를 낳았으면, 낳았었다는 표시
         # 예를 들어, 한번도 자식노드를 확장하지 않았을 때는 자식노드를 확장해야하지만
