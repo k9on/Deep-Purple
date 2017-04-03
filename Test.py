@@ -7,14 +7,15 @@ tmp = chess.Board()
 
 tmpStr = GB(tmp)
 
-tree = Tree.Tree()
+tree = Tree.tree()
 
 root = tree.play_tree(tmpStr)
 
-# #
+#
 # import chess
 # from GetBoardString import get_BoardString as GB
 # from MakeLegalMoves import make
+# import Node
 #
 # tmp=chess.Board()
 #
@@ -38,5 +39,9 @@ root = tree.play_tree(tmpStr)
 # legal = make(legal)
 #
 # print(legal)
-
-#print(MLM.make(.legal_moves)))
+#
+# node = Node.node()
+#
+# (node.get_Child()).append(1)
+#
+# print(node.get_Child())

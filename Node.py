@@ -112,7 +112,7 @@ class node:
     def set_Temp_child(self, child):
         self.child = deepcopy(child)
 
-    def get_Temp_child(self, child):
+    def get_Temp_child(self):
         return self.temp_child
 
     def set_Board(self, board):

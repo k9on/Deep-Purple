@@ -4,7 +4,7 @@ import chess
 from copy import deepcopy
 from GetBoardString import get_BoardString as GB
 
-class Tree:
+class tree:
     def __init__(self):
         self.penalty = 0
         #self.currentNode # 현재 가리키는 노드를 임시로 저장
@@ -32,11 +32,9 @@ class Tree:
         :return root: make_tree에서 받은 root를 반환
         '''
 
-        root = self.make_node()
+        root = self.make_node() #노드 만들기
 
-
-
-        root.board = board # board는 chess.board 임.
+        root.set_Board(board)  # board는 chess.board 임.
 
         temp = chess.Board(board)
 
@@ -48,15 +46,13 @@ class Tree:
 
         root.set_List(legal)
 
+        # print(root.get_List())
+
         root.set_Root(True) #내가 루트다.
-
-
-
 
         # root.set_List(MLM.make((chess.Board(tmpstr)).legal_moves)) # 가능한 수를 리스트로 갖자.
 
         return self.make_nodes(root)
-
 
     def make_node(self):
         '''
@@ -76,20 +72,20 @@ class Tree:
         '''
 
 
-        if len(present.list) != 0: #legalmoves가 있다! 그러면 리스트만큼 자식 노드 만들어서 잇자
-            while len(present.list) != 0:
-                command = (present.list).pop(0) #리스트중 첫번째 가능한 수 빼기
+        if len(present.get_List()) != 0: #legalmoves가 있다! 그러면 리스트만큼 자식 노드 만들어서 잇자
+            while len(present.get_List()) != 0:
+                command = (present.get_List()).pop(0) #리스트중 첫번째 가능한 수 빼기
                 node = self.make_node() #노드 만들기
                 node.set_Parent(present)    #부모랑 자식하고 잇기
-                (present.child).append(node) #부모에 자식추가하기 #원본리스트
-                (present.temp_child).append(node)    #다음 자식 따라갈때 쓸 사본 리스트
+                (present.get_Child()).append(node) #부모에 자식추가하기 #원본리스트
+                (present.get_Temp_child()).append(node)    #다음 자식 따라갈때 쓸 사본 리스트
                 node.set_Command(command) #노드에 커맨드 저장
+
 
 
                 #부모의 보드를 받아서 지금 현재 노드에 갱신된 노트판을 string으로 추가 *메모리감소효과
                 chess_board = chess.Board(present.get_Board())
-                command = str(command)
-                print(command, type(command))
+                # print(command, type(command))
 
                 chess_board.push_san(command)
 
@@ -98,7 +94,11 @@ class Tree:
 
                 temp = chess.Board(GB(chess_board))
 
+
+
                 legal = temp.legal_moves
+
+
 
                 legal = str(legal)
 
@@ -120,15 +120,15 @@ class Tree:
         else : #legalmoves가 없으면 다음 자식으로 이동
             # 자식을 만든 경험이 없고, 먼저 트리만들었던 형제가 리스트가 없었을때,
 
-            if len((present.get_Parent()).temp_child) > 1: #부모한테 다음 자식이 있으면
-                node = ((present.get_Parent()).temp_child).pop(1) #자식하나 빼서 노드만들러 갑시다.
+            if len((present.get_Parent()).get_Temp_child()) > 1: #부모한테 다음 자식이 있으면
+                node = (present.get_Parent()).pop(1) #자식하나 빼서 노드만들러 갑시다.
                 self.make_nodes(node)
 
             else : #    다음 자식이 없으면
-                if (present.get_Parent()).root == True : #그런데 자기 부모가 root면 root를 반환해라
-                    return (present.get_Parent()).root
+                if (present.get_Parent()).get_Root() == True : #그런데 자기 부모가 root면 root를 반환해라
+                    return (present.get_Parent()).get_Root()
 
-                self.make_nodes(present.parent) #자기 부모가 root가 아니면 부모로 가라.
+                self.make_nodes(present.get_Parent()) #자기 부모가 root가 아니면 부모로 가라.
 
     # def tree_search(self, node):
     #     '''
