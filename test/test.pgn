@@ -1,0 +1,560 @@
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "1"]
+[White "Tsegmed, Batchuluun"]
+[Black "Le, Quang Liem"]
+[Result "1-0"]
+[ECO "D43"]
+[WhiteElo "2517"]
+[BlackElo "2712"]
+[PlyCount "99"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6 5. Bg5 h6 6. Bxf6 Qxf6 7. e3 Nd7 8. Bd3
+dxc4 9. Bxc4 Bd6 10. O-O Qe7 11. e4 e5 12. d5 Nb6 13. Bb3 O-O 14. h3 Rd8 15.
+Qe2 a5 16. a3 a4 17. Ba2 Bd7 18. Rfd1 Be8 19. Rac1 Rac8 20. Rc2 Bc5 21. Rcd2
+Rd6 22. dxc6 Rxd2 23. Rxd2 bxc6 24. Qd1 Ra8 25. Qc2 Ra5 26. Qd1 g6 27. Qc2 Kg7
+28. Ne2 Bd6 29. Nc3 Bc7 30. Ne1 Bd6 31. Nf3 Bd7 32. Qd3 Bc7 33. Rc2 Ra8 34. Ne2
+Rd8 35. Qc3 Be8 36. Rd2 Ra8 37. Rc2 Nc8 38. Nc1 Na7 39. Bc4 Rb8 40. Nd3 Nb5 41.
+Bxb5 Rxb5 42. Nc5 Ra5 43. Qc4 g5 44. Nxa4 h5 45. Nh2 Ra8 46. Nf1 Rd8 47. Ne3
+Kh7 48. Qe2 f6 49. Rd2 Bg6 50. Nf5 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "2"]
+[White "Ding, Liren"]
+[Black "Bayarsaikhan, Gundavaa"]
+[Result "1-0"]
+[ECO "D38"]
+[WhiteElo "2702"]
+[BlackElo "2516"]
+[PlyCount "73"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Bb4 5. cxd5 exd5 6. Bg5 Nbd7 7. e3 c5 8.
+dxc5 Qa5 9. Rc1 Bxc3+ 10. bxc3 O-O 11. Nd4 Ne4 12. Bf4 Re8 13. Be2 Ndxc5 14. f3
+Nf6 15. Nb5 Ne6 16. Be5 Nd7 17. Bg3 Nb6 18. O-O Nc4 19. Bxc4 dxc4 20. Nd6 Rd8
+21. Qe2 b5 22. Rfd1 Ba6 23. Rd5 Qa3 24. Rcd1 Qxc3 25. Be5 Qa3 26. f4 c3 27. f5
+b4 28. Qf2 Ng5 29. h4 f6 30. hxg5 fxe5 31. f6 c2 32. f7+ Kf8 33. Qxc2 Qxe3+ 34.
+Kh1 Bb7 35. Qxh7 Rxd6 36. Qg8+ Ke7 37. Qxg7 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "3"]
+[White "Ismagambetov, Anuar"]
+[Black "Yu, Yangyi"]
+[Result "0-1"]
+[ECO "B90"]
+[WhiteElo "2495"]
+[BlackElo "2675"]
+[PlyCount "50"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Qf3 Nbd7 7. h3 Qb6 8.
+Nb3 e6 9. g4 h6 10. Bg2 Qc7 11. Qg3 g5 12. Be3 Ne5 13. O-O-O Nc4 14. Bd4 e5 15.
+Be3 b5 16. Rhe1 Be7 17. Re2 b4 18. Nd5 Nxd5 19. exd5 f5 20. Bd2 a5 21. Kb1 O-O
+22. Nc1 e4 23. gxf5 Bf6 24. c3 Be5 25. f4 Nxd2+ 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "4"]
+[White "Barbosa, Oliver"]
+[Black "Nguyen, Duc Hoa"]
+[Result "1-0"]
+[ECO "D90"]
+[WhiteElo "2572"]
+[BlackElo "2493"]
+[PlyCount "71"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. cxd5 Nxd5 6. Qb3 Nxc3 7. bxc3 c5 8.
+e3 O-O 9. Be2 Nc6 10. O-O Na5 11. Qa3 Qc7 12. e4 b6 13. Be3 Bb7 14. d5 e6 15.
+Rad1 exd5 16. exd5 Rfe8 17. Rfe1 Rad8 18. c4 Ba6 19. Qc1 Qd7 20. Bh6 Bxh6 21.
+Qxh6 f6 22. Qf4 Kg7 23. h4 Qd6 24. Qc1 Re7 25. Bd3 Rde8 26. Rxe7+ Rxe7 27. h5
+Bc8 28. Re1 Nb7 29. Re3 Qd8 30. Nh4 Rxe3 31. Qxe3 Nd6 32. hxg6 h6 33. Qf4 Qe7
+34. Bf5 Ba6 35. Be6 Bxc4 36. Qxc4 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "5"]
+[White "Murshed, Niaz"]
+[Black "Sethuraman, Panayappan Sethuram"]
+[Result "0-1"]
+[ECO "A84"]
+[WhiteElo "2479"]
+[BlackElo "2560"]
+[PlyCount "104"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 d5 2. c4 e6 3. Nc3 c6 4. e3 Nd7 5. Nf3 f5 6. Bd3 Bd6 7. cxd5 cxd5 8. Nb5
+Bb8 9. Bd2 Ne7 10. Bb4 Nb6 11. Qb3 Nc6 12. Bc5 Bd7 13. Qa3 Nc4 14. Bxc4 dxc4
+15. Nd6+ Bxd6 16. Bxd6 Qa5+ 17. Qc3 Rc8 18. O-O Qd5 19. Ba3 b5 20. Bc5 a5 21.
+Rfc1 a4 22. Re1 e5 23. Bb4 e4 24. Ne5 Be6 25. Ba3 Rg8 26. Rac1 Rd8 27. Nxc6
+Qxc6 28. Qb4 Rd7 29. Qc5 Qxc5 30. Bxc5 g5 31. Bb4 Bd5 32. Bd2 Kf7 33. Rf1 Ke6
+34. h3 Rf7 35. Rce1 c3 36. Bxc3 Bc4 37. d5+ Kd7 38. Rd1 Bxf1 39. Kxf1 f4 40.
+Ke2 Rc8 41. Rd2 f3+ 42. gxf3 Rxf3 43. d6 Rcf8 44. Ke1 Rxh3 45. Rd5 Rh2 46. Rxb5
+Rhxf2 47. Be5 Kc6 48. Ra5 R2f5 49. b4 axb3 50. axb3 Re8 51. Ra6+ Kb7 52. d7 Rd8
+0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "6"]
+[White "Goh, Wei Ming Kevin"]
+[Black "Dzhumaev, Marat"]
+[Result "0-1"]
+[ECO "C41"]
+[WhiteElo "2441"]
+[BlackElo "2553"]
+[PlyCount "102"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 d6 2. d4 Nf6 3. Nc3 e5 4. Nf3 Nbd7 5. Bc4 Be7 6. O-O O-O 7. a4 a6 8. a5
+exd4 9. Nxd4 Ne5 10. Ba2 Nc6 11. Bc4 Re8 12. Re1 Ng4 13. Nf5 Bxf5 14. exf5 Nf6
+15. f4 Qd7 16. Nd5 Nxd5 17. Qxd5 Bf6 18. Bd2 h5 19. c3 Rxe1+ 20. Rxe1 Rf8 21.
+b4 h4 22. g4 hxg3 23. hxg3 Nd8 24. Qe4 c6 25. Bd3 d5 26. Qe2 c5 27. bxc5 Qc7
+28. Kg2 d4 29. Qh5 dxc3 30. Bc1 Qc6+ 31. Be4 Qa4 32. Bd5 Re8 33. Rh1 Qc2+ 34.
+Kh3 Qe2 35. Bf3 Qd3 36. Kg2 Qc2+ 37. Kh3 g6 38. fxg6 Qxg6 39. Qxg6+ fxg6 40.
+Rd1 Nc6 41. Rd6 Kf7 42. Bd5+ Kg7 43. Rd7+ Re7 44. Rxe7+ Bxe7 45. Be3 Bf6 46.
+Kg4 Nxa5 47. Kf3 Nc6 48. Ke2 a5 49. Kd3 Nb4+ 50. Kc4 Nxd5 51. Kxd5 c2 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "7"]
+[White "Ahmed, Minhaz Uddin"]
+[Black "Jumabayev, Rinat"]
+[Result "0-1"]
+[ECO "B97"]
+[WhiteElo "2411"]
+[BlackElo "2548"]
+[PlyCount "88"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6 6. Bg5 e6 7. Qd2 Qb6 8.
+O-O-O a6 9. f4 Qxd4 10. Qxd4 Nxd4 11. Rxd4 Nd7 12. Be2 h6 13. Bh4 g5 14. fxg5
+Be7 15. Bg3 hxg5 16. Bxd6 Bxd6 17. Rxd6 Ke7 18. Rd4 Rb8 19. h3 Ne5 20. Nd1 Bd7
+21. Nf2 Rbc8 22. Rhd1 Rc7 23. Kb1 Rh4 24. Ng4 Ng6 25. Bf3 Bc6 26. Rd8 Rh8 27.
+Rxh8 Nxh8 28. Ne5 Bb5 29. Bh5 Kf6 30. Ng4+ Kg7 31. Rd2 Ng6 32. Bxg6 Kxg6 33. b3
+f6 34. Rd6 Rc6 35. Rd8 Rc7 36. Rg8+ Rg7 37. Rd8 Bc6 38. Rh8 Rf7 39. e5 f5 40.
+Nf6 Bxg2 41. Kc1 f4 42. h4 gxh4 43. Rxh4 f3 44. Rh2 Kf5 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "8"]
+[White "Sengupta, Deep"]
+[Black "Syah, Farid Firman"]
+[Result "1-0"]
+[ECO "B06"]
+[WhiteElo "2548"]
+[BlackElo "2396"]
+[PlyCount "83"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 d6 2. d4 g6 3. Nc3 Bg7 4. Be3 a6 5. Qd2 b5 6. Bd3 Bb7 7. a4 b4 8. Nd1 a5
+9. c3 Nf6 10. f3 bxc3 11. bxc3 O-O 12. Ne2 Nfd7 13. Bh6 e5 14. Bxg7 Kxg7 15.
+Ne3 exd4 16. cxd4 Nc6 17. O-O Nb4 18. Rfd1 Ba6 19. Bxa6 Rxa6 20. Rac1 Kg8 21.
+Ng3 Rc6 22. Rxc6 Nxc6 23. Rc1 Nb4 24. Nc4 Qa8 25. h4 d5 26. Ne5 Nxe5 27. dxe5
+c6 28. exd5 cxd5 29. Qd4 Rc8 30. Rxc8+ Qxc8 31. h5 Qc1+ 32. Nf1 Qc4 33. Qb6 Nc6
+34. h6 Kf8 35. Ne3 Qc1+ 36. Kh2 d4 37. Ng4 d3 38. Qc7 Qf4+ 39. Kh3 Qd4 40. Qxc6
+d2 41. Nf6 Qd8 42. Qc5+ 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "9"]
+[White "Nezad, Husain Aziz"]
+[Black "Al, Medaihki Mohd Ahmed A J"]
+[Result "0-1"]
+[ECO "B38"]
+[WhiteElo "2394"]
+[BlackElo "2546"]
+[PlyCount "168"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 c5 7. O-O cxd4 8. Nxd4
+Nc6 9. Be3 Bd7 10. Qd2 Rc8 11. Rac1 Ne5 12. b3 Neg4 13. Bg5 h6 14. Bh4 g5 15.
+Bg3 Qa5 16. f3 Ne5 17. Rfd1 Rfe8 18. Bf1 Nh5 19. Bf2 Nf4 20. Nf5 Bxf5 21. exf5
+Nh3+ 22. Kh1 Nxf3 23. gxf3 Bxc3 24. Qe3 Nxf2+ 25. Qxf2 Bf6 26. Bd3 Qc5 27. Qe2
+b5 28. Rc2 bxc4 29. Rxc4 Qb6 30. f4 d5 31. Ra4 d4 32. Ra6 Qb7+ 33. Qg2 Qxg2+
+34. Kxg2 Rc7 35. Kf3 Rb8 36. Bc4 Rbb7 37. Ra5 Rb6 38. Ke4 Rd6 39. h3 Kf8 40.
+Rb5 Rb6 41. Rd5 e6 42. Ra5 Ke7 43. fxe6 fxe6 44. f5 e5 45. Rg1 Rd6 46. Rg3 h5
+47. Rb5 Rb6 48. Ra5 Rd6 49. Rb5 Rd8 50. Ra5 Rb8 51. Rg1 Rb6 52. Rg2 Rd6 53. Rg3
+a6 54. a4 Rcc6 55. Kd3 Kd8 56. Rg2 Ke7 57. Rg3 Kf8 58. Ke4 Kg7 59. Rd5 Kf8 60.
+Ra5 Ke7 61. Kd3 Kd8 62. Rg2 Rb6 63. Rc5 Rdc6 64. Rd5+ Rd6 65. Rc5 Rdc6 66. Rd5+
+Kc7 67. Rc2 Rb4 68. Ke4 Rb8 69. Ra5 Kd6 70. Rd5+ Ke7 71. Rd2 Rbb6 72. Rd3 Rd6
+73. Ra5 Rbc6 74. Rg3 Kd8 75. Rd3 Kc7 76. Rg3 Kb8 77. Rd3 Ka7 78. Rxe5 Bxe5 79.
+Kxe5 Kb6 80. Bd5 Rc3 81. Kxd6 Rxd3 82. f6 Rd2 83. f7 Rf2 84. Ke7 d3 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "10"]
+[White "Salem, Abdulrahman Mohamed Saleh"]
+[Black "Kojima, Shinya"]
+[Result "1-0"]
+[ECO "B12"]
+[WhiteElo "2531"]
+[BlackElo "2385"]
+[PlyCount "0"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c6 2. d4 d5 3. e5 c5 4. dxc5 Nc6 5. Nf3 Bg4 6. c3 e6 7. b4 Bxf3 8. Qxf3
+Nxe5 9. Bb5+ Nc6 10. O-O Nf6 11. Bf4 Be7 12. Nd2 O-O 13. Rfe1 Nd7 14. Nb3 Bf6
+15. Bd6 Re8 16. Rad1 a6 17. Bxc6 bxc6 18. Na5 Qc8 19. c4 Nf8 20. Qh3 h6 21. a3
+Ra7 22. Qb3 Bd8 23. cxd5 Bxa5 24. dxe6 Rxe6 25. bxa5 Rb7 26. Qd3 Rb2 27. h3
+Rxe1+ 28. Rxe1 Ne6 29. f4 Rb5 30. a4 Rb4 31. Qc3 Qb7 32. f5 Nd4 33. Re4 Rb1+
+34. Kh2 Nxf5 35. Re8+ Kh7 36. Qd3 g6 37. Be5 Ng7 38. Bxg7 Kxg7 39. Qd4+ f6 40.
+Qd8 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "11"]
+[White "Akhras, Khaled"]
+[Black "Megaranto, Susanto"]
+[Result "1/2-1/2"]
+[ECO "C60"]
+[WhiteElo "2228"]
+[BlackElo "2524"]
+[PlyCount "100"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nge7 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 Nc6 7. Qe3 Be7
+8. Nc3 O-O 9. O-O d6 10. Rd1 a6 11. Be2 f5 12. f4 fxe4 13. Nxe4 Bf6 14. Bf3 Kh8
+15. Nxf6 Qxf6 16. Qf2 Qg6 17. Bxc6 bxc6 18. Rd3 h6 19. Bd2 Bf5 20. Rg3 Qf7 21.
+Bc3 Rg8 22. Re1 Raf8 23. b3 Kh7 24. h3 c5 25. Rge3 Re8 26. g4 Bd7 27. f5 Rxe3
+28. Rxe3 Re8 29. Kh2 Rxe3 30. Qxe3 Bc6 31. Kg3 Qd5 32. Kh4 Qe4 33. Qxe4 Bxe4
+34. Ba5 Bxc2 35. Bxc7 d5 36. Bb6 Bb1 37. Bxc5 Bxa2 38. b4 Bb1 39. Kg3 h5 40.
+Kf4 hxg4 41. hxg4 Kg8 42. Ke5 Kf7 43. Kxd5 g6 44. Ke5 gxf5 45. gxf5 Bd3 46. Bd4
+Bb5 47. Kd6 Bd3 48. Ke5 Bb5 49. Kd6 Bd3 50. Ke5 Bb5 1/2-1/2
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "12"]
+[White "Ghaemmaghami, Ehsan"]
+[Black "Filippov, Anton"]
+[Result "1/2-1/2"]
+[ECO "E11"]
+[WhiteElo "2554"]
+[BlackElo "2644"]
+[PlyCount "63"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 Bb4+ 4. Bd2 Qe7 5. g3 Nc6 6. Nc3 Bxc3 7. Bxc3 Ne4 8.
+Rc1 Nxc3 9. Rxc3 d6 10. d5 Nb8 11. Bg2 O-O 12. dxe6 fxe6 13. c5 d5 14. O-O Nc6
+15. Nd4 Nxd4 16. Qxd4 c6 17. f4 Bd7 18. e4 b6 19. Re1 bxc5 20. Qxc5 Qxc5+ 21.
+Rxc5 Rfd8 22. b4 Kf8 23. Ra5 Rab8 24. a3 Rb7 25. Kf2 h6 26. Ke3 Be8 27. exd5
+exd5 28. Kd4 Rdd7 29. Rc5 Re7 30. Rcc1 Rxe1 31. Rxe1 a5 32. Kc3 1/2-1/2
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "13"]
+[White "Paragua, Mark"]
+[Black "Kyaw, Lin Naing"]
+[Result "1-0"]
+[ECO "B90"]
+[WhiteElo "2569"]
+[BlackElo "2249"]
+[PlyCount "115"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. h3 e5 7. Nde2 h5 8. Bg5
+Be6 9. Bxf6 Qxf6 10. Nd5 Bxd5 11. Qxd5 Nc6 12. Nc3 Qe6 13. Qd2 Rc8 14. Nd5 Ne7
+15. Ne3 g6 16. Qb4 Bh6 17. Bc4 Qd7 18. O-O-O Rc6 19. Rd3 O-O 20. Rhd1 Qc7 21.
+Bb3 Rd8 22. Kb1 b5 23. g4 h4 24. Ng2 Rc5 25. Qe1 a5 26. a4 bxa4 27. Bxa4 Bg5
+28. Ne3 Nc8 29. Nd5 Qa7 30. f4 exf4 31. e5 Nb6 32. Nxb6 Qxb6 33. exd6 Bf6 34.
+Rb3 Qa6 35. d7 Re5 36. Qf2 Qc4 37. Qb6 Kg7 38. Bb5 Qc5 39. Qxc5 Rxc5 40. c4 Re5
+41. Rbd3 Be7 42. Rd5 Kf6 43. Kc2 Bb4 44. g5+ Ke6 45. Rxe5+ Kxe5 46. Rd5+ Ke6
+47. Kd3 Be7 48. Ke4 Bd6 49. c5 Bc7 50. c6 f5+ 51. gxf6 Kxf6 52. Kf3 Rb8 53. b3
+Ke7 54. Kg4 Rf8 55. Kf3 Rf5 56. d8=Q+ Bxd8 57. Rd7+ Ke8 58. Ba4 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "14"]
+[White "Chan, Yi Ren Daniel"]
+[Black "Nanjo, Ryosuke"]
+[Result "1/2-1/2"]
+[ECO "B87"]
+[WhiteElo "2324"]
+[BlackElo "2299"]
+[PlyCount "160"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bc4 e6 7. Bb3 b5 8. Bg5
+Be7 9. Qf3 Qb6 10. O-O-O Nbd7 11. Rhe1 O-O 12. Qg3 Nc5 13. f4 Bb7 14. Bh6 Ne8
+15. f5 Nxb3+ 16. axb3 e5 17. f6 Bxf6 18. Nf5 Rd8 19. Ne3 Rd7 20. Rf1 Qd8 21.
+Qg4 Bc6 22. Ncd5 Bxd5 23. Nxd5 Be7 24. h4 Rb7 25. Rd3 Kh8 26. Bd2 Nf6 27. Nxf6
+Bxf6 28. Bg5 Be7 29. Kb1 f6 30. Bd2 Qd7 31. Qe2 Qe6 32. g4 Rd7 33. Qg2 Kg8 34.
+h5 h6 35. Rd1 Bd8 36. Qf3 Bb6 37. Bb4 Rfd8 38. Qf5 Qxf5 39. gxf5 Bc7 40. c4 a5
+41. Be1 b4 42. Bf2 Kf8 43. Rd5 Ke7 44. Kc2 Rb8 45. Be3 Rdd8 46. Kb1 Ra8 47. Kc2
+Rab8 48. Rg1 Kf7 49. Rd2 Rbc8 50. Rdg2 Rg8 51. Rd1 Rgd8 52. Rd5 Rb8 53. Kd3 Rb7
+54. Rg1 Rbb8 55. Ke2 Rb7 56. Rgd1 Ke8 57. Rc1 Kf7 58. Bf2 Ke8 59. Ra1 Ke7 60.
+Be3 Ke8 61. Kf3 Ke7 62. Rd2 Rbb8 63. Rc2 Ke8 64. Ke2 Ke7 65. Kd3 Rbc8 66. Rd2
+Rb8 67. Rad1 Rbc8 68. Ke2 Ke8 69. Kf3 Rb8 70. Ra1 Ke7 71. Rc2 Ke8 72. Rg2 Kf7
+73. Rg6 Rbc8 74. Ke2 Rb8 75. Kd3 Rbc8 76. Rg2 Rb8 77. Rag1 Rg8 78. Ra1 Rgd8 79.
+Bd2 Bb6 80. Be3 Bc7 1/2-1/2
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "17"]
+[White "Alahakoon, Isuru"]
+[Black "Al-Zandani, Zendan Ali Nasser"]
+[Result "0-1"]
+[ECO "B23"]
+[WhiteElo "2047"]
+[BlackElo "2360"]
+[PlyCount "60"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nc3 Nc6 3. f4 e6 4. Nf3 Nd4 5. Bc4 a6 6. a4 Ne7 7. O-O Nec6 8. Ne2
+Nxf3+ 9. Rxf3 d5 10. Bb3 dxe4 11. Rg3 Nd4 12. Nxd4 Qxd4+ 13. Kh1 c4 14. c3 Qd5
+15. Bc2 g6 16. b3 b5 17. Re3 f5 18. axb5 axb5 19. bxc4 bxc4 20. Ba4+ Bd7 21. d3
+Bxa4 22. Rxa4 cxd3 23. Bb2 Rxa4 24. Qxa4+ Qd7 25. Qb3 d2 26. Qd1 Bc5 27. Re2 e3
+28. c4 O-O 29. Be5 Rd8 30. h4 Qd3 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "18"]
+[White "Othman, Mohammed Gamil Abdulsal"]
+[Black "Malakar, Prachanda Man"]
+[Result "1-0"]
+[ECO "B77"]
+[WhiteElo "2239"]
+[BlackElo "1984"]
+[PlyCount "57"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Bc4 Bg7 7. Be3 O-O 8.
+Bb3 d6 9. f3 Nd7 10. Qd2 Re8 11. h4 Na5 12. Bxf7+ Kxf7 13. Ne6 Ne5 14. Nxd8+
+Rxd8 15. Qd5+ Be6 16. Qxa5 Nc4 17. Qg5 Nxb2 18. Nd5 Rd7 19. h5 Bxd5 20. hxg6+
+hxg6 21. Qxd5+ e6 22. Qb5 Rc7 23. Rh7 Nc4 24. Bh6 Rg8 25. Qg5 Ne5 26. Bxg7 Rxg7
+27. Qh6 Kg8 28. Rh8+ Kf7 29. Qf4+ 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "19"]
+[White "Li, Hui"]
+[Black "Alkhoori, Ibraheem Hohamed Ahmed"]
+[Result "1/2-1/2"]
+[ECO "C89"]
+[WhiteElo "1947"]
+[BlackElo "2336"]
+[PlyCount "0"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 O-O 8. c3
+d5 9. exd5 e4 10. dxc6 exf3 11. d4 fxg2 12. Bf4 a5 13. Qf3 a4 14. Bd1 Re8 15.
+Nd2 Be6 16. Qxg2 a3 17. b3 b4 18. Be5 1/2-1/2
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "20"]
+[White "Oo, Zaw"]
+[Black "Celis, Chang Joel"]
+[Result "1-0"]
+[ECO "B35"]
+[WhiteElo "2258"]
+[BlackElo "1876"]
+[PlyCount "63"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Be3 Bg7 6. Nc3 Nf6 7. Bc4 d6 8.
+Bb3 Ng4 9. Nxc6 bxc6 10. Bg5 h6 11. Bh4 O-O 12. O-O Ne5 13. f4 Nd7 14. Re1 Nc5
+15. e5 d5 16. Bf2 Nxb3 17. axb3 Qc7 18. Na4 f6 19. e6 Rb8 20. Qg4 Rb4 21. Qxg6
+Qxf4 22. Nc5 Qg5 23. Qxg5 fxg5 24. c3 Rb5 25. Rxa7 Rxf2 26. Kxf2 Rxc5 27. Rxe7
+Kf8 28. Rf7+ Kg8 29. Rc7 Bxe6 30. Rxe6 d4 31. Rg6 Rf5+ 32. Ke2 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "21"]
+[White "Yee, Soon Wei"]
+[Black "Hassan, Mohamed"]
+[Result "1-0"]
+[ECO "C47"]
+[WhiteElo "2234"]
+[BlackElo "1851"]
+[PlyCount "109"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. d4 d6 5. dxe5 dxe5 6. Qxd8+ Kxd8 7. Bg5 Ke8
+8. Bxf6 gxf6 9. Nd5 Bd6 10. Nxf6+ Kf8 11. O-O-O Be6 12. Nd5 h6 13. Bc4 Na5 14.
+Be2 a6 15. Rd2 Nc6 16. Rhd1 b5 17. c3 Rb8 18. Nh4 Ne7 19. Kb1 Nxd5 20. exd5 Bd7
+21. Bd3 Rg8 22. f3 Rg5 23. g4 Ke7 24. Re2 Kf6 25. Bf5 Bxf5+ 26. Nxf5 Rxf5 27.
+gxf5 Rg8 28. Re4 Kxf5 29. Rh4 Rg6 30. Kc2 Be7 31. Re4 Bd6 32. a4 Kf6 33. Rg4
+Rxg4 34. fxg4 Kg5 35. axb5 axb5 36. Rf1 Kxg4 37. Rxf7 e4 38. Kd2 Bxh2 39. Ke3
+h5 40. Kxe4 Kg5 41. b3 Kg6 42. Rf2 Bg3 43. Re2 h4 44. c4 bxc4 45. bxc4 Kf6 46.
+Kf3 Kf5 47. c5 Be5 48. Kg2 Bg3 49. Kh3 Kf6 50. Re6+ Kf5 51. c6 Bf2 52. Re7 Bg3
+53. Re6 Bf2 54. Rh6 Bg3 55. d6 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "22"]
+[White "Kananub, Warot"]
+[Black "Ashraf, Ahmed"]
+[Result "1-0"]
+[ECO "D06"]
+[WhiteElo "2169"]
+[BlackElo "1837"]
+[PlyCount "53"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 d5 3. cxd5 Nxd5 4. e4 Nf6 5. Nc3 e6 6. Be3 Bb4 7. f3 O-O 8. a3
+Be7 9. Bd3 Nbd7 10. e5 Nd5 11. Nxd5 exd5 12. Qc2 h6 13. f4 Nb6 14. Nf3 Bh4+ 15.
+g3 Be7 16. f5 Re8 17. O-O Nc4 18. Bc1 c5 19. b3 Nb6 20. f6 gxf6 21. Bxh6 Bh3
+22. Bh7+ Kh8 23. Ng5 Be6 24. Bg8 f5 25. Rxf5 f6 26. Rxf6 Bxg8 27. Bg7+ 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "23"]
+[White "Ahn, Sungmin"]
+[Black "Lee, Sanghoon"]
+[Result "0-1"]
+[ECO "A45"]
+[WhiteElo "1776"]
+[BlackElo "2153"]
+[PlyCount "118"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. Bg5 Ne4 3. Bf4 c5 4. d5 d6 5. f3 Qa5+ 6. c3 Nf6 7. e4 g6 8. Na3
+Bg7 9. Bb5+ Bd7 10. Bxd7+ Nbxd7 11. Qd2 Nh5 12. Be3 Ne5 13. Ne2 Qa6 14. O-O-O
+b5 15. Kb1 Rb8 16. f4 b4 17. fxe5 bxa3 18. b3 Bxe5 19. Kc2 Nf6 20. c4 Nxe4 21.
+Qd3 f5 22. Bh6 Qa5 23. Rhf1 Nf6 24. Bg7 Rg8 25. Bxf6 Bxf6 26. Qd2 Qxd2+ 27.
+Rxd2 a5 28. Rb1 Rb4 29. Rd3 Be5 30. Nc3 Bxc3 31. Rxc3 Kf7 32. Re1 Rgb8 33. Rce3
+R8b7 34. Rh3 Kg7 35. Ree3 a4 36. Rc3 h5 37. Rhe3 Kf7 38. h4 Rb8 39. Kc1 axb3
+40. axb3 Ra8 41. Kb1 a2+ 42. Ka1 Ra3 43. g3 Rb7 44. Rcd3 g5 45. Rc3 gxh4 46.
+gxh4 f4 47. Re4 Rbxb3 48. Rxf4+ Kg6 49. Rxb3 Rxb3 50. Kxa2 Rg3 51. Re4 Kf7 52.
+Rf4+ Ke8 53. Rf5 Rg4 54. Rxh5 Rxc4 55. Kb3 Rd4 56. Kc3 Kf7 57. Rh7+ Kf6 58. Rh5
+Kg6 59. Rg5+ Kh6 0-1
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "24"]
+[White "Weerawardane, R."]
+[Black "Abdalsalam, M A Albazzour Khita"]
+[Result "1-0"]
+[ECO "E51"]
+[WhiteElo "2131"]
+[BlackElo "0"]
+[PlyCount "99"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 d5 4. e3 Bb4 5. Bd2 O-O 6. Nf3 b6 7. Be2 Bb7 8. O-O
+h6 9. Ne5 Nbd7 10. Nxd5 Nxd5 11. cxd5 Bxd2 12. Nxd7 Qxd7 13. dxe6 fxe6 14. Qxd2
+Rf6 15. f3 Rd8 16. Qc2 Qd6 17. Rac1 Rd7 18. Qa4 a5 19. Bb5 Re7 20. e4 Qf4 21.
+Qb3 Rg6 22. Rc2 h5 23. Qa3 Rf7 24. Be8 Rff6 25. Bxg6 Rxg6 26. Qd3 h4 27. Rff2
+Rf6 28. Qd2 Qxd2 29. Rfxd2 c6 30. Rc3 Kh7 31. Rdc2 b5 32. Rc5 Kh6 33. Kf2 g5
+34. Ke3 a4 35. a3 Kg6 36. g3 h3 37. f4 gxf4+ 38. gxf4 Kh6 39. Rg5 Rg6 40. Rcc5
+Rxg5 41. Rxg5 Bc8 42. Rg3 e5 43. dxe5 c5 44. f5 b4 45. e6 c4 46. axb4 c3 47.
+bxc3 a3 48. Rg1 Ba6 49. f6 Bc4 50. f7 1-0
+
+[Event "AIMAG 4th - Men"]
+[Site "Incheon 2013"]
+[Date "2013.07.01"]
+[Round "2"]
+[Board "25"]
+[White "Muath, M A Alhanafi Fatma"]
+[Black "Kulpruethanon, Thanadon"]
+[Result "0-1"]
+[ECO "B30"]
+[WhiteElo "0"]
+[BlackElo "2111"]
+[PlyCount "120"]
+[EventDate "2013.06.30"]
+[EventRounds "7"]
+[EventCountry "KOR"]
+
+1. e4 c5 2. Nf3 Nc6 3. a3 Nf6 4. Nc3 g6 5. Bc4 d6 6. d3 Bg7 7. Ba2 O-O 8. h3
+Rb8 9. O-O b5 10. Nd5 e6 11. Ne3 h6 12. Nh2 e5 13. Nd5 Nxd5 14. Bxd5 Ne7 15.
+Ba2 d5 16. Be3 d4 17. Bd2 Kh7 18. f4 f5 19. fxe5 fxe4 20. dxe4 Nc6 21. Qe2 c4
+22. Rxf8 Qxf8 23. Rf1 Qe7 24. Ng4 Bxg4 25. Qxg4 Nxe5 26. Qg3 Re8 27. Bb4 Qb7
+28. Bd6 Qxe4 29. Bxe5 Qxe5 30. Qxe5 Rxe5 31. a4 a6 32. axb5 axb5 33. b3 c3 34.
+b4 d3 35. cxd3 Re2 36. Bd5 Rb2 37. Rc1 Rxb4 38. Kf2 Rb2+ 39. Ke3 b4 40. Bc4 h5
+41. Kf3 Bh6 42. Re1 c2 43. Re7+ Bg7 44. Rc7 c1=Q 45. Bg8+ Kxg8 46. Rxc1 Rd2 47.
+Ke4 b3 48. Rb1 b2 49. Ke3 Rxg2 50. d4 Rg3+ 51. Ke4 Bxd4 52. Kxd4 Rxh3 53. Rxb2
+Rf3 54. Ke4 Rf7 55. Ke5 Kg7 56. Ke6 Rf1 57. Ke5 Kh6 58. Ke4 h4 59. Rb8 Kh5 60.
+Rh8+ Kg4 0-1
+
