@@ -1,8 +1,8 @@
 #체스게임 플레이
 
 import chess
-#import MontecarloTreeSearch as AI
-
+import MontecarloTreeSearch as MCTS
+import GetBoardString as GBS
 MaxGameNum = 100
 boardList = [0 * 1 for i in range(100)]
 CountGame = 0
@@ -34,14 +34,22 @@ def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정�
 
         #print(board.turn) # true 는 white false 는 black
         if (MainBoard.turn):
-            choice = input("white choice ( exit = 0 ) : ")
+            mcts = MCTS.Monte()
+            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
+            str = gbs
+            choice = mcts.monteCarloTreeSearch(str)
         else :
-            choice = input("black choice ( exit = 0 ) : ")
+            mcts = MCTS.Monte()
+            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
+            str = gbs
+            choice = mcts.monteCarloTreeSearch(str)
+
 
         if (choice == "0") :
             print("bye")
             break
         else :
+            print("\r")
             MainBoard.push_san(choice)
 
 
