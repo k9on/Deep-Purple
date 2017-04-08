@@ -5,8 +5,8 @@ import numpy as np
 # x_data = np.transpose(xy[0:-1])
 # y_data = np.reshape(xy[-1], (4, 1))
 
-x_data = [[1,0],[0,1]]
-y_data = [[1,0],[0,1]]
+x_data = [[0,0],[1,0],[1,1],[0,1]]
+y_data = [[0,4],[1,5],[2,6],[3,7]]
 
 X = tf.placeholder(tf.float32, name='x-input')
 Y = tf.placeholder(tf.float32, name='y-input')
@@ -37,14 +37,14 @@ L6 = tf.nn.relu(tf.matmul(L5, w5) + b5)
 L7 = tf.nn.relu(tf.matmul(L6, w6) + b6)
 L8 = tf.nn.relu(tf.matmul(L7, w7) + b7)
 
-hypothesis = tf.sigmoid(tf.matmul(L8, w8) + b8)
+hypothesis = (tf.matmul(L8, w8) + b8)
 
 with tf.name_scope('cost') as scope:
     cost = tf.reduce_mean(tf.square(hypothesis- Y))
     #cost_summ = tf.summary.scalar("cost", cost)
 
 with tf.name_scope('train') as scope:
-    a = tf.Variable(0.1)
+    a = tf.Variable(0.01)
     optimizer = tf.train.GradientDescentOptimizer(a)
     train = optimizer.minimize(cost)
 
