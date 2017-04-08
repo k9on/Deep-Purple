@@ -91,7 +91,9 @@ class pgn_reader:
             board = b # b2array(b, flip)
             move = gns[rand-1][1].move
             input.append(board)
-            output.append(move)
+            move_str = move.__str__()
+            #print(move_str)
+            output.append(move_str)
             results.append(result)
             index.append(len(gns)-rand)
         return index, input, output, results
@@ -111,5 +113,3 @@ class pgn_reader:
             result.append(rm[i])
 
         return index, input,output,result
-
-
