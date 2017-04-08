@@ -1,27 +1,19 @@
 import chess.pgn
 import numpy
 import random
+import Board2Array as BA
+
+'''
+사용법 : 
+
+ # 폴더경로를 이용해 rd객체 하나를 생성
+rd = pgn_reader('./test/test.pgn')
+
+# get_data()메소드를 이용하면, index 몇번쨰 수인지, input 보드상태, output 명령어, r 승패결과
+index, input, output, r = rd.get_data() 
 
 
-def bb2array(b, flip=False):  # b - board를 배열로 변환
-    x = numpy.zeros(64, dtype=numpy.int8)  # 하나의 체스 상황을 담아둘 8x8 배열을 만들어 둠
-    p=b.pieces
-    print(p)
-    #
-    # for pos, piece in enumerate(b.pieces):  # 2차원 배열 [ 인덱스 / 체스말 번호 ]
-    #     if piece != 0:  # 체스말이 없는 빈칸이 아니면
-    #         color = int(bool(b.occupied_co[chess.BLACK] & chess.BB_SQUARES[pos]))  # 0 or 1 말이 흑인지 백인지
-    #         col = int(pos % 8)  # 64개의 인덱스를 8로 나눠 열을 구함
-    #         row = int(pos / 8)  # 64개의 인덱스를 8로 나눠 행을 구함
-    #         if flip:  # flip이 True면 상황을 반전 시켜서 출력함
-    #             row = 7 - row  # 뒤집기
-    #             color = 1 - color  # 뒤집기
-    #
-    #         piece = color * 7 + piece  # 백은 0~6 흑은 7~13
-    #
-    #         x[row * 8 + col] = piece  # 행열로 된 상태를 1차원 배열로 다시 만듬
-
-    return x  # 리턴
+'''
 
 def read_games(f): # pgn파일을 불러와 한 게임 별로 배열로 만들어 리턴함
     gs = []
@@ -86,6 +78,7 @@ class pgn_reader:
         input=[]
         output=[]
         results = []
+        ba = BA.Board2Array()
         for i in range(self.len):
             gns, result = self.get_game(self.gs[i])
             #print(result)
@@ -94,7 +87,8 @@ class pgn_reader:
                 flag = 0
             rand = random.randint(flag,len(gns)-1)
             b = gns[rand][1].board()
-            board = bb2array(b)
+            b = ba.board2array(b)
+            board = b # b2array(b, flip)
             move = gns[rand-1][1].move
             input.append(board)
             output.append(move)
@@ -119,59 +113,3 @@ class pgn_reader:
         return index, input,output,result
 
 
-
-rd = pgn_reader('./test/test.pgn')
-index, input, output, r = rd.get_data()
-print(index)
-print(input)
-print(output)
-print(r)
-
-# def parse_game(g):  # g는 1개 단위의 게임기보
-
-#     gn = g.end()  # gn(Game Node) 게임의 끝
-#     if not gn.board().is_game_over():  # 마지막 기보가 게임이 끝난 기보 상태가 아니면 리턴, 즉 기보 데이터의 손상 혹은 기권을 의미
-#         return None
-#     gns = []  # 게임 노드들을 담아둘 배열
-#     moves_left = 0
-#     while gn:  # 게임의 노드가 끝날 때 까지
-#         gns.append((moves_left, gn, gn.board().turn == 0))  # 게임 노드를 계속해서 배열화, 몇번째 착수 인지,
-#         gn = gn.parent
-#         moves_left += 1
-#
-#     print
-#     len(gns)
-#     if len(gns) < 10:  # 게임기보를 마지막부터 처음까지 배열화하였는데, 배열수가 10개 이하면 마지막 기보상태를 출력
-#         print
-#         g.end()
-#
-#     gns.pop()  # 마지막에 넣은게 pop, 즉 게임시작 기보는 pop으로 제거
-#
-#     moves_left, gn, flip = random.choice(gns)  # remove first position
-#     # gns에 넣었던 노드중에 랜덤으로 하나 뽑음
-#
-#     b = gn.board()  # 보드
-#     x = bb2array(b, flip=flip)  # 보드상태 64개 배열로
-#     b_parent = gn.parent.board()  # 부모노드
-#     x_parent = bb2array(b_parent, flip=(not flip))  # 부모노드의 보드상태
-#     if flip:  # 적이면
-#         y = -y  # Switch
-#
-#     # generate a random baord
-#     moves = list(b_parent.legal_moves)  # 부모노드의 moves
-#     move = random.choice(moves)  # 랜덤을 하나 뽑아서
-#     b_parent.push(move)  # 부모노드에 적용
-#     x_random = bb2array(b_parent, flip=flip)  # 배열화
-#
-#     if moves_left < 3:  # 끝에서 세번째정도면
-#         print
-#         moves_left, 'moves left'
-#         print
-#         'winner:', y
-#         print
-#         g.headers
-#         print
-#         b
-#         print
-#         'checkmate:', g.end().board().is_checkmate()
-#     return (x, x_parent, x_random, moves_left, y)
