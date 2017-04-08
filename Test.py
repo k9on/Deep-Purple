@@ -1,12 +1,13 @@
-a = [ 0 * 1 for i in range(100)]
-
 import chess
+import Board2Array as BA
+b = chess.Board()
 
-board1 = chess.Board()
-board1.push_san("e3")
-moves = board1.legal_moves
+print(b)
 
-print(moves)
+ba = BA.Board2Array()
 
-print(type(moves))
+b = ba.board2array(b)
+
+print(b)
+
 
