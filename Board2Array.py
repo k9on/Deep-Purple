@@ -26,3 +26,6 @@ class Board2Array:
             elif str[i] == '.': boardArray[i] = 0
 
         return boardArray
+
+    def cmd2str(self, cmd):
+        return
