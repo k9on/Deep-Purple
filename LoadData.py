@@ -111,5 +111,6 @@ class pgn_reader:
         boards = []
         for i in results:
             result.append(rm[i])
-
+        ba = BA.Board2Array()
+        output = ba.remake(output)
         return index, input,output,result

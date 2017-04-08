@@ -2,72 +2,90 @@ import tensorflow as tf
 import LoadData as LD
 import numpy as np
 
-def init_weights(shape):
-    return tf.Variable(tf.random_normal(shape, stddev=0.01))
-
-def model(X, w,w2,w4,w_o,p_keep_conv, p_keep_hidden):
-    l1a = tf.nn.relu(tf.nn.conv2d(X, w,  # l1a shape=(?, 28, 28, 32)
-                                  # stride = [ 스킵할 데이터 수, 행의 스킵수, 열의 스킵수, 필터의 스킵수 ]
-                                  # 기본적으로 스킵 데이터수 =1, 필터의 스킵 수 = 1
-                                  # 로 하여 모든 데이터에 학습하고, 필터를 스킵하여 필터의 기능을 최대한 유지
-                                  # padding = same 은 stride가 1일 경우에 input과 output의 크기를 동일하게
-                                  # 하도록 padding의 값을 자동 설정하는 것을 의미한다.
-                                  strides=[1, 1, 1, 1], padding='SAME'))
-    # pooling을 통해 sampling을 진행
-    # pooling 사이즈 = 2x2x1 : 1개의 필터 씩, 2 x 2 크기로 풀링
-    l1 = tf.nn.max_pool(l1a, ksize=[1, 2, 2, 1],  # l1 shape=(?, 14, 14, 32)
-                        # stride의 행과 열이 2씩임으로 output의 크기가 절반씩 줄어들고 필터의 수는 동일
-                        strides=[1, 2, 2, 1], padding='SAME')
-    # 매개변수로 정의한 keep_conv만큼 노드 부분 활성화
-    l1 = tf.nn.dropout(l1, p_keep_conv)
-
-    l2a = tf.nn.relu(tf.nn.conv2d(l1, w2,  # l2a shape=(?, 14, 14, 64)
-                                  strides=[1, 1, 1, 1], padding='SAME'))
-    l2 = tf.nn.max_pool(l2a, ksize=[1, 2, 2, 1],  # l2 shape=(?, 7, 7, 64)
-                        strides=[1, 2, 2, 1], padding='SAME')
-    l2 = tf.nn.dropout(l2, p_keep_conv)
-
-    l3a = tf.nn.relu(tf.nn.conv2d(l2, w3,  # l3a shape=(?, 7, 7, 128)
-                                  strides=[1, 1, 1, 1], padding='SAME'))
-    l3 = tf.nn.max_pool(l3a, ksize=[1, 2, 2, 1],  # l3 shape=(?, 4, 4, 128)
-                        strides=[1, 2, 2, 1], padding='SAME')
-    # CNN과 FCNN의 인터페이스를 맞춰주기 위해 3차원 배열을 1차원 배열로 변환하여
-    # Tensorflow의 계산을 용이하게 하도록함
-    # reshape[ -1 = 데이터의 수를 정확하게 모름 , 1차원 배열의 수 = FCNN Layer의 노드당 w수 , 행 * 열 * 필터
-    l3 = tf.reshape(l3, [-1, w4.get_shape().as_list()[0]])  # reshape to (?, 2048)
-    l3 = tf.nn.dropout(l3, p_keep_conv)
-    # FCNN의 계산을 진행
-    l4 = tf.nn.relu(tf.matmul(l3, w4))
-    # FCNN의 부분학습을 위해 Dropout
-    l4 = tf.nn.dropout(l4, p_keep_hidden)
-
-    pyx = tf.matmul(l4, w_o)
-    # 최종적인 hypothesis만을 리턴
-    return pyx
-
-
 # 학습데이터 확보
 
 ld = LD.pgn_reader('./test/test.pgn')
 
 index, input, output, r = ld.get_data()
+print(input)
+print(output)
 
-print(len(index))
+trainX = input
+trainY = output
+# sampleX= [[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4],
+#           [0,9,8,7,6,5,4,3,2,1,0,9,8,7,6,5,4,3,2,1,0,9,8,7,6,5,4,3,2,1,0,9,8,7,6,5,4,3,2,1,0,9,8,7,6,5,4,3,2,1,0,9,8,7,6,5,4,3,2,1,0,9,8,7]]
+# sampleY = [[1,2,3,4], [5,6,7,8]]
 
-print(index, input, output, r)
+sampleX = [[1,2],[3,4],[5,6]]
+sampleY = [[1],[2],[3]]
+#print(output[0][3])
 
 # 그래프 생성
 
-# 결과값 지정
+X = tf.placeholder(tf.float32, name='x-input')
+Y = tf.placeholder(tf.float32, name='y-input')
 
+w1 = tf.Variable(tf.random_uniform([2, 100], -1.0, 1.0), name='weight1')
+w2 = tf.Variable(tf.random_uniform([100, 200], -1.0, 1.0), name='weight2')
+w3 = tf.Variable(tf.random_uniform([200, 1], -1.0, 1.0), name='weight3')
+# w4 = tf.Variable(tf.random_uniform([10, 10], -1.0, 1.0), name='weight4')
+# w5 = tf.Variable(tf.random_uniform([10, 10], -1.0, 1.0), name='weight5')
+# w6 = tf.Variable(tf.random_uniform([10, 10], -1.0, 1.0), name='weight6')
+# w7 = tf.Variable(tf.random_uniform([10, 10], -1.0, 1.0), name='weight7')
+# w8 = tf.Variable(tf.random_uniform([10, 4], -1.0, 1.0), name='weight8')
+
+b1 = tf.Variable(tf.zeros([100]), name="Bias1")
+b2 = tf.Variable(tf.zeros([200]), name="Bias2")
+b3 = tf.Variable(tf.zeros([1]), name="Bias3")
+# b4 = tf.Variable(tf.zeros([10]), name="Bias4")
+# b5 = tf.Variable(tf.zeros([10]), name="Bias5")
+# b6 = tf.Variable(tf.zeros([10]), name="Bias6")
+# b7 = tf.Variable(tf.zeros([10]), name="Bias7")
+# b8 = tf.Variable(tf.zeros([4]), name="Bias8")
+
+L2 = tf.nn.relu(tf.matmul(X, w1) + b1)
+L3 = tf.nn.relu(tf.matmul(L2, w2) + b2)
+L4 = tf.nn.relu(tf.matmul(L3, w3) + b3)
+# L5 = tf.nn.relu(tf.matmul(L4, w4) + b4)
+# L6 = tf.nn.relu(tf.matmul(L5, w5) + b5)
+# L7 = tf.nn.relu(tf.matmul(L6, w6) + b6)
+# L8 = tf.nn.relu(tf.matmul(L7, w7) + b7)
+#
+
+
+a = tf.Variable(0.01)
+
+# 결과값 지정
+# hypothesis = tf.nn.relu(tf.matmul(L8, w8) + b8)
+hypothesis = L4
 # 학습데이터 - 결과값 = 코스트
 
+cost = tf.reduce_mean(tf.square(hypothesis - Y))
 # 코스트 함수의 Gradient Descent 방법 지정
+optimizer = tf.train.GradientDescentOptimizer(a)
 
 # Train 함수
-
+train = optimizer.minimize(cost)
 # 세션 생성
+init = tf.initialize_all_variables()
+
 
 # 학습
+with tf.Session() as sess:
+    sess.run(init)
 
+    for step in range(20000):
+        sess.run(train, feed_dict={X: sampleX, Y: sampleY})
+        if step % 200 == 0:
+            print (step, sess.run(cost, feed_dict={X: sampleX, Y: sampleY}))
+
+    correct_prediction = tf.equal(tf.floor(hypothesis+0.5), Y)
+    print("------------------------------------------")
+    #print(sess.run(w1),sess.run(w2))
+    print(sess.run(hypothesis, feed_dict={X:sampleX}))
+    print(sampleY)
+
+    # accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+    # print(sess.run([hypothesis, tf.floor(hypothesis+0.5), correct_prediction], feed_dict={X: x_data, Y: y_data}))
+    # print("accuracy", accuracy.eval({X: x_data, Y: y_data}))
 # 학습결과 ( cost, acculate )
