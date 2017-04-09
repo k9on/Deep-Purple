@@ -44,7 +44,7 @@ with tf.name_scope('cost') as scope:
     #cost_summ = tf.summary.scalar("cost", cost)
 
 with tf.name_scope('train') as scope:
-    a = tf.Variable(0.01)
+    a = tf.Variable(0.001)
     optimizer = tf.train.GradientDescentOptimizer(a)
     train = optimizer.minimize(cost)
 

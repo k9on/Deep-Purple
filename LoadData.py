@@ -85,7 +85,9 @@ class pgn_reader:
             flag = 1
             if last:
                 flag = 0
-            rand = random.randint(flag,len(gns)-1)
+            if len(gns) <= 1 :
+                continue
+            rand = random.randint(1,len(gns)-1)
             b = gns[rand][1].board()
             b = ba.board2array(b)
             board = b # b2array(b, flip)
