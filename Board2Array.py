@@ -65,7 +65,7 @@ class Board2Array:
 
             output2.append(temp)
         return output2
-    
+
     # 8x8*13형태로
 
     def trans_result(self,result):

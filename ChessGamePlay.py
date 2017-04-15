@@ -31,21 +31,20 @@ def selectMode():
 
 def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정해야함
     while(True):
-
+        print("a b c d e f g h")
+        print("---------------")
         print(MainBoard,chr(13))
-
+        print("---------------")
+        print("a b c d e f g h")
+        monte = M.Monte()
         #print(board.turn) # true 는 white false 는 black
         if (MainBoard.turn):
 
-            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
-
-            monte = M.Monte(gbs, MainBoard.turn)
-
-            choice = monte.predict()
+            choice = input("choide:")
         else :
             gbs = GBS.GetBoardString().get_BoardString(MainBoard)
 
-            monte = M.Monte(gbs, MainBoard.turn)
+
 
             choice = monte.predict()
 

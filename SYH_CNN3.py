@@ -2,83 +2,89 @@ import tensorflow as tf
 import LoadData as LD
 import numpy as np
 
-batch_size = 128
-test_size = 256
-
 def init_weights(shape):
     return tf.Variable(tf.random_normal(shape, stddev=0.01))
 
-def model(X, w, w2, w3, w4, w_o, p_keep_conv, p_keep_hidden):
-    l1a = tf.nn.relu(tf.nn.conv2d(X, w,strides=[1, 1, 1, 1], padding='SAME')) #  8 8 32
-    print(l1a)
-    l1 = tf.nn.max_pool(l1a, ksize=[1, 2, 2, 1],strides=[1, 2, 2, 1], padding='SAME') # 4 4 32
-    print(l1)
-    l1 = tf.nn.dropout(l1, p_keep_conv)
-    #l2a = tf.nn.relu(tf.nn.conv2d(l1, w2,strides=[1, 1, 1, 1], padding='SAME')) # 4 4 64
-    #print(l2a)
-    #l2 = tf.nn.max_pool(l2a, ksize=[1, 2, 2, 1],strides=[1, 2, 2, 1], padding='SAME') # 2 2 64
-    #l2 = tf.nn.dropout(l2, p_keep_conv)
-    #print(l2)
-    #l3a = tf.nn.relu(tf.nn.conv2d(l2, w3,strides=[1, 1, 1, 1], padding='SAME')) # 2 2 128
-    #print(l3a)
-    #l3 = tf.nn.max_pool(l3a, ksize=[1, 1, 1, 1],strides=[1, 1, 1, 1], padding='SAME') # 1 1 128
-    #print(l3)
-    #l3 = tf.reshape(l3, [-1, w4.get_shape().as_list()[0]])
-    #print(l3)
-    l3 = tf.reshape(l1, [-1, w4.get_shape().as_list()[0]] )
-    l3 = tf.nn.dropout(l3, p_keep_conv)
-    l4 = tf.nn.relu(tf.matmul(l3, w4))
+def model(X, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden):
+    l1 = tf.nn.relu(tf.nn.conv2d(X, w,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
+    # l2 = tf.nn.relu(tf.nn.conv2d(l1, w2,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
+    # l3 = tf.nn.relu(tf.nn.conv2d(l2, w3,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
+    # l4 = tf.nn.relu(tf.nn.conv2d(l3, w4, strides=[1, 1, 1, 1], padding='SAME'))  # 8 8 31
+    l4 = tf.reshape(l1, [-1, w5.get_shape().as_list()[0]])
+    l5 = tf.nn.relu(tf.matmul(l4, w5))
 
-    l4 = tf.nn.dropout(l4, p_keep_hidden)
-    print(l4)
-    pyx = tf.matmul(l4, w_o)
+    pyx = tf.matmul(l5, w_o)
     print(pyx)
     return pyx
 
-ld = LD.pgn_reader('./test/test2.pgn')
+def play():
+    ld = LD.pgn_reader('./test/test.pgn')
 
-index, input, output, r = ld.get_data()
-input = np.reshape(input,[-1,8,8,13])
+    index, pboard, board, rboard, result = ld.get_data()
+    print(index)
+    print(board)
 
-print(index[0])
-print(input[0])
-print(output[0])
+    input1 = np.reshape(board,[-1,8,8,13])
+    input2 = np.reshape(rboard,[-1,8,8,13])
+    # input1 = board # np.reshape(board,[-1,8,8,13])
+    # input2 = rboard # np.reshape(rboard,[-1,8,8,13])
+    print(index[0])
+    print(pboard[0])
+    print("--------------------------------")
+    print(input1[0])
+    print("--------------------------------")
+    print(input2[0])
+    trainX = input1
+    trainY = input2
+    trX = trainX
+    trY = trainY
+    teX = trainX
+    teY = trainY
 
-trainX = input
-trainY = output
-trX = trainX
-trY = trainY
-teX = trainX
-teY = trainY
+    X = tf.placeholder("float", [None, 8, 8, 13])
+    Y = tf.placeholder("float", [None, 8, 8, 13])
 
-X = tf.placeholder("float", [None, 8, 8, 13])
-Y = tf.placeholder("float", [None, 4])
+    w = init_weights([4, 4, 13, 20])      # 4x4x13 conv 81 outputs
+    w2 = init_weights([2, 2, 81, 81])     # 2x2x81 conv, 81 outputs
+    w3 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
+    w4 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
+    w5 = init_weights([8*8*20, 1000])    # 81 필터에 8*8 이미지
+    w_o = init_weights([1000, 1])         # FC 625 inputs, 4 outputs (labels)
 
-w = init_weights([2, 2, 13, 32])      # 3x3x13 conv, 32 outputs
-w2 = init_weights([2, 2, 32, 64])     # 3x3x32 conv, 64 outputs
-w3 = init_weights([2, 2, 64, 128])    # 3x3x64 conv, 128 outputs
-w4 = init_weights([32*4*4, 625]) # 128의 필터에 4 * 4 이미지
-w_o = init_weights([625, 4])         # FC 625 inputs, 4 outputs (labels)
+    p_keep_conv = tf.placeholder("float")
+    p_keep_hidden = tf.placeholder("float")
 
-p_keep_conv = tf.placeholder("float")
-p_keep_hidden = tf.placeholder("float")
+    py_x = model(X, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden)
+    py_y = model(Y, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden)
+    cost_ = py_x  - 1 - py_y
+    cost_a = tf.square(cost_)
 
-py_x = model(X, w, w2, w3, w4, w_o, p_keep_conv, p_keep_hidden)
+    cost = tf.reduce_mean(tf.square(cost_))
 
-cost = tf.reduce_mean(tf.square(py_x - Y))
-train_op = tf.train.RMSPropOptimizer(0.001, 0.9).minimize(cost)
-predict_op = py_x
+    a = 0.001
+    train_op = tf.train.GradientDescentOptimizer(a).minimize(cost)
 
-with tf.Session() as sess:
-    tf.global_variables_initializer().run()
-    for i in range(3000):
+    saver = tf.train.Saver()
 
-        sess.run(train_op, feed_dict={X: trX, Y: trY,
-                                          p_keep_conv: 0.8, p_keep_hidden: 0.5})
+    modelname = "./mymodel/model.ckpt"
 
-        print (i,sess.run(cost, feed_dict={X: trX, Y: trY,
-                                            p_keep_conv: 0.8, p_keep_hidden: 0.5}))
-    print(sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.}))
-    print(teY)
-print(index)
-print(len(teY))
+    with tf.Session() as sess:
+        tf.global_variables_initializer().run()
+        saver.restore(sess, modelname)
+        print(sess.run(w))
+        for i in range(1):
+            #print(a)
+            sess.run(train_op, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5})
+            print (i,sess.run(cost, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5}))
+            if i%200 == 0:
+                save_path = saver.save(sess, modelname)
+        print(sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.}))
+        print(sess.run(py_y, feed_dict={Y: trY, p_keep_conv: 1., p_keep_hidden: 1.}))
+        print(len(trX))
+        print(sess.run(w2))
+        #save_path = saver.save(sess, modelname)
+        print(sess.run(py_y, feed_dict={Y: trX[1:3], p_keep_conv: 1., p_keep_hidden: 1.}))
+
+        return sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.})
+
+# play()

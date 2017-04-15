@@ -71,26 +71,28 @@ import random
 #         break
 #
 
-def make_policyNextRandomChildIndex(self=None, board=None):
-    # children = policy.ask(board)
-    children = []
+# def make_policyNextRandomChildIndex(self=None, board=None):
+#     # children = policy.ask(board)
+#     children = []
+#
+#     distribution = [0.1,0.2,0.3,0.4]
+#     flag = 0
+#     index = 0
+#     rand_num = random.random()
+#     for i in distribution:
+#         if flag <= rand_num < flag + i:
+#             return index
+#         else:
+#             index += 1
+#             flag += i
+#
+#
+#
+# results = [0,0,0,0]
+# while True :
+#     result = make_policyNextRandomChildIndex()
+#     results[result] += 1
+#     sum = results[0] + results[1] + results[2] + results[3]
+#     print(results[0]/sum, results[1]/sum, results[2]/sum, results[3]/sum)
 
-    distribution = [0.1,0.2,0.3,0.4]
-    flag = 0
-    index = 0
-    rand_num = random.random()
-    for i in distribution:
-        if flag <= rand_num < flag + i:
-            return index
-        else:
-            index += 1
-            flag += i
 
-
-
-results = [0,0,0,0]
-while True :
-    result = make_policyNextRandomChildIndex()
-    results[result] += 1
-    sum = results[0] + results[1] + results[2] + results[3]
-    print(results[0]/sum, results[1]/sum, results[2]/sum, results[3]/sum)

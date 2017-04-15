@@ -15,7 +15,7 @@ import chess
 import randPolicy as rp
 import GetBoardString as GBS
 class Monte:
-    def __init__(self,board_str,turn = True, repeat_num = 100,select_depth = 100, simulation_num = 1,expend_point = 2 ):
+    def __init__(self,board_str,turn = True, repeat_num = 1, select_depth = 10, simulation_num = 1,expend_point = 5):
         self.tree = TR.Tree(board_str)  # 트리 생성
         # self.turn = self.tree.get_CurrentNode().get_Color()  # 처음 차례 # 본 모듈은 항상 백 입장이라 가정하고 수행
         self.expand_point = expend_point  # 확장 기준값
@@ -23,6 +23,7 @@ class Monte:
         self.repeat_num = repeat_num  # 반복 수행할 횟수
         self.simulation_num = simulation_num
         self.turn = turn
+
 
     def predict(self):
         for i in range(self.repeat_num):
@@ -42,7 +43,7 @@ class Monte:
                     result = self.simulation()
             else :
                 result = self.tree.get_Result()
-                print(result)
+                #print(result)
 
             # backpropagation
             result = self.change_Result(result)
@@ -103,14 +104,14 @@ class Monte:
             return False
 
     def simulation(self):
-        #print("simulation")
+        print("simulation")
 
         tmpBoard = self.tree.get_currentBoard().copy()
 
         simul_count = 0
         while not tmpBoard.is_game_over():
             simul_count += 1
-
+            print(simul_count)
             tmpBoard = self.tree.make_policyNextRandomChildBoard(tmpBoard)
             # print(tmpBoard.turn)
             #print("--------------------------------------")
@@ -133,12 +134,3 @@ class Monte:
         self.tree.currentNode.print_childInfo()
         return root.child[index].command
 
-b = chess.Board()
-
-b.push_san("e4")
-
-gbs = GBS.GetBoardString().get_BoardString(b)
-
-monte = Monte(gbs,b.turn)
-
-print(monte.predict())
