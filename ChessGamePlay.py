@@ -3,6 +3,7 @@
 import chess
 import MontecarloTreeSearch as MCTS
 import GetBoardString as GBS
+import Monte2 as M
 MaxGameNum = 100
 boardList = [0 * 1 for i in range(100)]
 CountGame = 0
@@ -30,20 +31,23 @@ def selectMode():
 
 def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정해야함
     while(True):
-        print(MainBoard)
+
+        print(MainBoard,chr(13))
 
         #print(board.turn) # true 는 white false 는 black
         if (MainBoard.turn):
-            mcts = MCTS.Monte()
-            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
-            str = gbs
-            choice = mcts.monteCarloTreeSearch(str)
-        else :
-            mcts = MCTS.Monte()
-            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
-            str = gbs
-            choice = mcts.monteCarloTreeSearch(str)
 
+            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
+
+            monte = M.Monte(gbs, MainBoard.turn)
+
+            choice = monte.predict()
+        else :
+            gbs = GBS.GetBoardString().get_BoardString(MainBoard)
+
+            monte = M.Monte(gbs, MainBoard.turn)
+
+            choice = monte.predict()
 
         if (choice == "0") :
             print("bye")

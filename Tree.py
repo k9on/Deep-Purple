@@ -29,7 +29,7 @@ class Tree:
     def get_CurrentNode(self):#현재 tree가 가리키고 있는 노드 반환
         return self.currentNode
 
- #Board_Stack에 추가할 command를 갱신해야 함
+    #Board_Stack에 추가할 command를 갱신해야 함
     def set_CurrentNode(self ,node):#들어온 node를 currentNode로
         self.currentNode = node
 
@@ -38,7 +38,7 @@ class Tree:
 
     def add_ChildNode(self,node): #tree에서 currentNode에 자식 추가
         self.currentNode.add_ChildNode(node)
-#수정해야함
+
     def make_MonteCarloNextChild(self):
         # 몬테카를로에서 다음 자식을 호출하기 위해
         #tmpBoard = chess.Board(self.currentNode.get_BoardString())  # chess. Board 생성
@@ -61,8 +61,8 @@ class Tree:
     # policy
     def make_policyNextChildren(self, flip = None):
         tmpBoard = self.board_stack.get_ChessBoard()
+
         # 정책망에게 보드상태를 넘겨주면 가능한 moves를 넘겨 받는다.
-        ############################################################
         ######################## Random Policy #####################
         model = rp.Model(tmpBoard)
         policy_points, moves = model.get()
@@ -79,7 +79,6 @@ class Tree:
 
     # rollout
     def make_policyNextRandomChildIndex(self, board):
-        # children = policy.ask(board)
         children = []
         tmpNode = Node.Node(parent=None, command=None)
         tmpNode.set_Child(children)
@@ -109,7 +108,6 @@ class Tree:
             children.append(child)
         tmpNode.set_Child(children)
         distribution = tmpNode.get_policyDistribution()
-        #print(distribution)
         flag = 0
         index = 0
         rand_num = rand.random()

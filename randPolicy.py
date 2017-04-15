@@ -23,7 +23,7 @@ class Model():
 
     def randScores(self):
         for i in range(self.len):
-            score = random.randint(0,100)
+            score = random.randint(1,101)
             self.scores[i] = score
 
     def view_scores(self):

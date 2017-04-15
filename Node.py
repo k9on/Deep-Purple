@@ -132,8 +132,9 @@ class Node:
     def get_policyDistribution(self):
         scores = []
         sum = self.sumChildPolicyScore()
+
         for child in self.child:
-            score = child.policy_Score /( sum + 0.1 )
+            score = child.policy_Score /sum
             scores.append(score)
 
         return scores
@@ -194,5 +195,5 @@ class Node:
 
     def print_childInfo(self):
         lenth = len(self.child)
-        for i in range(lenth):
-            print(i,"> win:", self.child[i].win, "loss:", self.child[i].lose, "draw:", self.child[i].draw, "command:", self.child[i].command, self.child[i].visit)
+        #for i in range(lenth):
+            #print(i,"> win:", self.child[i].win, "loss:", self.child[i].lose, "draw:", self.child[i].draw, "command:", self.child[i].command, self.child[i].visit)

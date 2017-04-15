@@ -15,52 +15,63 @@ import chess
 import randPolicy as rp
 import GetBoardString as GBS
 class Monte:
-    def __init__(self,board_str, repeat_num = 10,select_depth = 10, simulation_num = 1,expend_point = 20 ):
+    def __init__(self,board_str,turn = True, repeat_num = 100,select_depth = 100, simulation_num = 1,expend_point = 2 ):
         self.tree = TR.Tree(board_str)  # 트리 생성
         # self.turn = self.tree.get_CurrentNode().get_Color()  # 처음 차례 # 본 모듈은 항상 백 입장이라 가정하고 수행
         self.expand_point = expend_point  # 확장 기준값
         self.select_depth = select_depth  # 선택을 종료할 깊이
         self.repeat_num = repeat_num  # 반복 수행할 횟수
         self.simulation_num = simulation_num
+        self.turn = turn
 
     def predict(self):
-
         for i in range(self.repeat_num):
-            print(i, "번쨰 탐색")
+            #print(i, "번쨰 탐색")
 
-            # 현재 노드를 root 노드로 초기화
             self.tree.go_root()
-            #print(self.tree.currentNode.is_root())
             depth = 0
+
             # selection
             result_selection = self.selection(depth)  # selection에서 게임이 끝이 났으면 0, 끝이 안났으면 1
 
             if result_selection != 0: # 선택에서 게임이 끝나지 않앗으면 확장과 시뮬레이션
                 # expantion
-                self.expantion()
-
-                # simulation
-                result = self.simulation()
+                result = self.expantion()
+                if not result :
+                    # simulation
+                    result = self.simulation()
             else :
-                result = self.tree.currentNode.get_Result()
+                result = self.tree.get_Result()
+                print(result)
 
             # backpropagation
+            result = self.change_Result(result)
             self.backpropagation(result)
 
         # choice
         choice = self.choice()
         return choice
 
+    def change_Result(self, result):
+        if self.turn :
+            return result
+        else :
+            if result == "1-0":
+                return "0-1"
+            elif result == "0-1":
+                return "1-0"
+            else : return result
+        return result
+
     def selection(self, depth):
-        print(self.tree.currentNode.command)
         if depth%2 == 0:  # 내차례, 내 차례는 항상 흰색이라 가정
             flip = False
         else:  # 적차례
             flip = True
             
         if self.tree.get_GameOver():  # 보드가 게임이 끝난 상태라면 ( 흰승 : 1, 검은승 : -1, 무: 0
-            result = 0 # get_result
             return 0
+
         else:  # 보드가 게임이 끝나지 않았다면
             if self.select_depth > depth:  # select해야할 깊이라면
                 if not self.tree.currentNode.get_Flag():  # 자식노드 체크
@@ -72,40 +83,44 @@ class Monte:
 
             else:  # 깊이 기준을 초과하였다면
                 if self.tree.currentNode.get_Flag(): # 자식이 있으면 자식으로
+                    print("자식있음")
                     self.tree.go_next()
-                    return self.selecttion(depth+1) * 1
+                    return self.selection(depth+1) * 1
                 else:  # 자식이 없다면 이제 끝
                     return 1
 
     def expantion(self):
-        print("expantion")
+
         if self.tree.currentNode.should_expand(self.expand_point):
+            print("expantion")
             self.tree.make_policyNextChildren()
             self.tree.go_next()
-            return True
+            if self.tree.board_stack.get_GameOver() :
+                return self.tree.board_stack.get_Result()
+            else :
+                return self.expantion()
         else:
             return False
 
     def simulation(self):
-        print("simulation")
+        #print("simulation")
 
         tmpBoard = self.tree.get_currentBoard().copy()
-       # print(tmpBoard)
+
+        simul_count = 0
         while not tmpBoard.is_game_over():
+            simul_count += 1
+
             tmpBoard = self.tree.make_policyNextRandomChildBoard(tmpBoard)
             # print(tmpBoard.turn)
-            print("--------------------------------------")
-            print(tmpBoard)
+            #print("--------------------------------------")
+            #print(tmpBoard)
             # print(tmpBoard.is_game_over())
         result = tmpBoard.result()
         return result
 
     def backpropagation(self, result):
-
-        #print("backpropagation")
-        print(self.tree.currentNode.command)
         if self.tree.currentNode.is_root():
-            print(result)
             return 0
         else:
             self.tree.currentNode.renew_result(result)
@@ -113,7 +128,6 @@ class Monte:
             return self.backpropagation(result)
 
     def choice(self):
-        print("choice")
         root = self.tree.get_RootNode()
         index = root.For_root_choice()
         self.tree.currentNode.print_childInfo()
@@ -121,8 +135,10 @@ class Monte:
 
 b = chess.Board()
 
+b.push_san("e4")
+
 gbs = GBS.GetBoardString().get_BoardString(b)
 
-monte = Monte(gbs)
+monte = Monte(gbs,b.turn)
 
 print(monte.predict())
