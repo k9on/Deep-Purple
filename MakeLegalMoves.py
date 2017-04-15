@@ -23,8 +23,3 @@ class MovesMaker: #legal_Moves에서 명령어로 배열로 받기 위한 클래
             return self.legal_Moves_List.pop(index)
         # make후에 legal_Mmoves_List가 가리키는게 없다면 가능한 노드가 없는것
         return None
-
-
-
-
-

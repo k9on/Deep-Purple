@@ -10,8 +10,11 @@ class Board_Stack():
             self.chessBoard = chess.Board(boardString)
 
     def stack_push(self, command): #boardStack에 체스판 쌓기
+        #print(type(command))
+        #print(self.boardStack)
         self.chessBoard.push_san(command) #입력 받은 명령어를 chessBoard에 갱신
         self.boardStack.append(command)
+
 
     def stack_pop(self): #boardStack의 선입선출
         self.chessBoard.pop() #가장 최근 들어간 명령어를 pop

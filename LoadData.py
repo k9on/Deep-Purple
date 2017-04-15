@@ -1,18 +1,18 @@
 import chess.pgn
+import chess
 import numpy
 import random
 import Board2Array as BA
+import MakeLegalMoves as MLM
 
 '''
 사용법 : 
 
- # 폴더경로를 이용해 rd객체 하나를 생성
+# 폴더경로를 이용해 rd객체 하나를 생성
 rd = pgn_reader('./test/test.pgn')
 
 # get_data()메소드를 이용하면, index 몇번쨰 수인지, input 보드상태, output 명령어, r 승패결과
 index, input, output, r = rd.get_data() 
-
-
 '''
 
 def read_games(f): # pgn파일을 불러와 한 게임 별로 배열로 만들어 리턴함
@@ -77,6 +77,7 @@ class pgn_reader:
         index=[]
         input=[]
         output=[]
+        routput = []
         results = []
         ba = BA.Board2Array()
         for i in range(self.len):
@@ -89,30 +90,38 @@ class pgn_reader:
                 continue
             rand = random.randint(1,len(gns)-1)
             b = gns[rand][1].board()
-            b = ba.board2array(b)
-            board = b # b2array(b, flip)
+            board = ba.board2array(b)# b2array(b, flip)
             move = gns[rand-1][1].move
+            # random move
+            lm=b.legal_moves
+            mlm = MLM.MovesMaker()
+            mlm.make(lm.__str__())
+            san_rmove = mlm.get_RandomMove()
+            rmove = b.push_san(san_rmove)
+            b.pop()
             input.append(board)
             move_str = move.__str__()
-            #print(move_str)
+            rmove_str = rmove.__str__()
             output.append(move_str)
+            routput.append(rmove_str)
             results.append(result)
             index.append(len(gns)-rand)
-        return index, input, output, results
+        return index, input, output,routput, results
+        # return index, board, rboard, results
 
     def get_data(self, last = False):
-        index, input, output, results = self.analyze(last)
-        temp = self.trans(index, input, output, results)
+        index, input, output,routput, results = self.analyze(last)
+        # index, board, rboard, results = self.analyze(last)
+        temp = self.trans(index, input, output,routput, results)
+        # temp = self.trans(index, board, rboard, results)
         return temp
 
-
-
-    def trans(self,index,input,output,results):
+    def trans(self,index,input,output,routput,results):
         rm = {'1-0': 1, '0-1': -1, '1/2-1/2': 0}  # 게임의 끝, ( 백승 = 1, 흑승 = -1, 무승부, 0 )
         result= []
-        boards = []
         for i in results:
             result.append(rm[i])
         ba = BA.Board2Array()
         output = ba.remake(output)
-        return index, input,output,result
+        routput = ba.remake(routput)
+        return index, input,output,routput,result

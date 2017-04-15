@@ -2,6 +2,8 @@ import Node
 import chess
 import Board_Stack as BS
 import MakeLegalMoves as MLM
+import random as rand
+import randPolicy as rp
 class Tree:
 
     def __init__(self,boardString): # 체스보드의 현재 상태를 입력받아 board_stack에 전달
@@ -16,6 +18,10 @@ class Tree:
         self.root_Node = Node.Node(None,None) # 루트 노드 생성
         self.currentNode = self.root_Node #루트노드가 생성될 때 currentNode로 설정
         self.currentNode.set_Color(self.board_stack.get_Color())
+
+    def go_root(self):
+        self.currentNode = self.root_Node
+        self.board_stack.clear_Stack()
 
     def set_BoardString(self,boardString):
         self.boardString = boardString
@@ -51,62 +57,89 @@ class Tree:
         newChildNode.set_Color(self.board_stack.get_Color())
 
         return newChildNode  # 생성된 Node를 반환
-#수정해야함 +1, 올라갈때 자식노드 업데이트함
-    def backpropagation(self):
 
-        while self.currentNode.get_Parent() != None:
-            #currentNode가 backpropagation으로 거슬러 올라갈때
-            #currentNode의 부모노드가 None 이라면, currentNode가 root이다!!
+    # policy
+    def make_policyNextChildren(self, flip = None):
+        tmpBoard = self.board_stack.get_ChessBoard()
+        # 정책망에게 보드상태를 넘겨주면 가능한 moves를 넘겨 받는다.
+        ############################################################
+        ######################## Random Policy #####################
+        model = rp.Model(tmpBoard)
+        policy_points, moves = model.get()
+        ############################################################
+        children = []
+        lenth = len(moves)
+        for i in range(lenth):
+            child = Node.Node(self.currentNode, moves[i], policy_points[i])
+            child.set_Color(not self.board_stack.get_Color())
+            children.append(child)
+        self.currentNode.set_Child(children)
 
-            #처음 들어온 currentNode는 게임이 끝난 final 노드로로 승무패 저장해야 한.
-            parent = self.currentNode.get_Parent() #
-            parent.add_Win(self.currentNode.get_Lose())
-            parent.add_Lose(self.currentNode.get_Win())
-            parent.add_Draw(self.currentNode.get_Draw())
-            parent.compute_Score() # 승무패를 update한 후 Score 계산
+        self.currentNode.on_Flag()
 
-            self.currentNode = parent
+    # rollout
+    def make_policyNextRandomChildIndex(self, board):
+        # children = policy.ask(board)
+        children = []
+        tmpNode = Node.Node(parent=None, command=None)
+        tmpNode.set_Child(children)
+        distribution = tmpNode.get_policyDistribution()
+        flag = 0
+        index = 0
+        rand_num = rand.random()
+        for i in distribution:
+            if flag <= rand_num < flag+i:
+                return index
+            else:
+                index += 1
+                flag += i
 
-            # 부모노드로 올라갔으므로 자식 명령어들을
-            # pop하여 board_stack을 update
-            # stack 리스트와 chess.Board() 동시에 update
-            self.board_stack.stack_pop()
+    def make_policyNextRandomChildBoard(self, board):
+        tmpBoard = board.copy()
+        turn = tmpBoard.turn
+        model = rp.Model(tmpBoard)
+        policy_points, moves = model.get()
+        children = []
 
-            #parent.set_Child(None)  #자식 노드를 버릴 때 사용
+        tmpNode = Node.Node(parent=None, command=None)
+        lenth = len(moves)
+        for i in range(lenth):
+            child = Node.Node(tmpNode, moves[i], policy_points[i])
+            child.set_Color(turn)
+            children.append(child)
+        tmpNode.set_Child(children)
+        distribution = tmpNode.get_policyDistribution()
+        #print(distribution)
+        flag = 0
+        index = 0
+        rand_num = rand.random()
+        for i in distribution:
+            if flag <= rand_num < flag+i:
+                break
+            else:
+                index += 1
+                flag += i
+        childcommand = tmpNode.child[index].command
+        tmpBoard.push_san(childcommand)
+        return tmpBoard
+
     def get_RootNode(self):
         return self.root_Node
-    def get_BestMove(self):
-        childList = self.root_Node.get_Child()
-        print(childList)
-        bestIndex = 0
-        for i in range(len(self.get_RootNode().get_Child())-1):
-            if childList[i].get_Score() < childList[i+1].get_Score():
-                bestIndex = i+1
-
-        #가장 점수가 높은 Node의 Command를 return
-        bestMove = childList[bestIndex].get_Command()
-        for i in range(len(self.get_RootNode().get_Child()) - 1):
-            print("Command= %s /ChildList[%s] Score = %s / win = %s /draw = %s / lose = %s" %(childList[i].get_Command(),i, childList[i].get_Score(),childList[i].get_Win(), childList[i].get_Draw(),childList[i].get_Lose()))
-        print("MCTS return Command = ",bestMove , " Score = ", childList[bestIndex].get_Score())
-        return bestMove
 
     def get_GameOver(self):
         return self.board_stack.get_GameOver() #게임종료를 True False로 반환
     def get_Result(self):
         return self.board_stack.get_Result()
-    def set_GameResult(self):
-        #게임이 끝나고 승 무 패를 저장한다
-        if '1-0' == self.get_Result(): #white 승
-            if  self.board_stack.get_Color() == True : #현재 노드가 white라면 '승' 추가
-                self.currentNode.add_Win(1)
-            else : # 현재 노드가 black이라면 '패' 추가
-                self.currentNode.add_Lose(1)
-        elif '0-1' == self.get_Result(): # black 승
-            if self.board_stack.get_Color() == True: # 현재 노드가 black이라면 '패'추가
-                self.currentNode.add_Lose(1)
-            else : #현재 노드가 black이라면 '승' 추가
-                self.currentNode.add_Win(1)
-        else: #무승부
-            self.currentNode.add_Draw(1)
 
-        self.currentNode.compute_Score()
+    def go_next(self):
+        self.currentNode = self.currentNode.get_bestChild()
+        self.currentNode.visited()
+        self.board_stack.stack_push(self.currentNode.command)
+
+    def go_parrent(self):
+        self.currentNode = self.currentNode.get_Parent()
+        self.board_stack.stack_pop()
+
+    def get_currentBoard(self):
+        return self.board_stack.get_ChessBoard()
+

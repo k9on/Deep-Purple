@@ -57,5 +57,3 @@ class Monte:
         return self.tree.get_BestMove()
 
     #def get_BestMove(self):
-
-

@@ -67,3 +67,8 @@ class Board2Array:
         return output2
     
     # 8x8*13형태로
+
+    def trans_result(self,result):
+        rm = {'1-0': 1, '0-1': -1, '1/2-1/2': 0}  # 게임의 끝, ( 백승 = 1, 흑승 = -1, 무승부, 0 )
+
+        return rm[result]
