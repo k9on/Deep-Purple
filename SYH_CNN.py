@@ -8,7 +8,10 @@ index, input,output,r = ld.get_data()
 
 print(len(index))
 
-print(index, input,output,r)
+print(index)
+print(input)
+print(output)
+print(r)
 # 학습데이터 확보
 
 # 그래프 생성

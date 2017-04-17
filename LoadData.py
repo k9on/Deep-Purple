@@ -113,3 +113,7 @@ class pgn_reader:
             result.append(rm[i])
 
         return index, input,output,result
+        # index
+        # input
+        # output
+        # result
