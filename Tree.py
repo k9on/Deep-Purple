@@ -34,6 +34,8 @@ class policy_model:
         self.py_x = self.model(self.X, self.w, self.w2, self.w3, self.w4, self.w5, self.w_o, self.p_keep_conv,
                           self.p_keep_hidden)
 
+
+
     def model(self,X, w, w2, w3, w4, w5, w_o, p_keep_conv, p_keep_hidden):
         l1 = tf.nn.relu(tf.nn.conv2d(X, w, strides=[1, 1, 1, 1], padding='SAME'))  # 8 8 31
         l4 = tf.reshape(l1, [-1, w5.get_shape().as_list()[0]])
@@ -90,14 +92,16 @@ class policy_model:
 
 class Tree:
 
-    def __init__(self,boardString): # 체스보드의 현재 상태를 입력받아 board_stack에 전달
+    def __init__(self): # 체스보드의 현재 상태를 입력받아 board_stack에 전달
         self.root_Node = None
         self.penalty = 0
         self.currentNode = None#현재 가리키는 노드를 임시로 저장
-        self.board_stack = BS.Board_Stack(boardString) #MCTS에서 각노드의 명령어를 사용할 Board_Stack
-
-        self.set_RootNode()
+        self.board_stack = None #MCTS에서 각노드의 명령어를 사용할 Board_Stack
         self.pm = policy_model()
+
+    def reset_board(self,boardString):
+        self.board_stack = BS.Board_Stack(boardString)
+        self.set_RootNode()
 
     def set_RootNode(self):
         self.root_Node = Node.Node(None,None) # 루트 노드 생성
@@ -124,29 +128,10 @@ class Tree:
     def add_ChildNode(self,node): #tree에서 currentNode에 자식 추가
         self.currentNode.add_ChildNode(node)
 
-    def make_MonteCarloNextChild(self):
-        # 몬테카를로에서 다음 자식을 호출하기 위해
-        #tmpBoard = chess.Board(self.currentNode.get_BoardString())  # chess. Board 생성
-        tmpBoard = self.board_stack.get_ChessBoard()
-        #print(tmpBoard)
-
-        # MoveMaker에 현재 board 상태에서 생성된 legal_Moves_List 생성
-        movesMaker = MLM.MovesMaker()
-        movesMaker.make(tmpBoard.legal_moves.__repr__())
-
-
-        # 자식을 생성하기 위해 임의로 생성된 Move
-        command = movesMaker.get_RandomMove()
-
-        newChildNode = Node.Node(self.currentNode, command)
-        newChildNode.set_Color(self.board_stack.get_Color())
-
-        return newChildNode  # 생성된 Node를 반환
-
     # policy
     def make_policyNextChildren(self, flip = None):
         tmpBoard = self.board_stack.get_ChessBoard()
-
+        turn = tmpBoard.turn
         # 정책망에게 보드상태를 넘겨주면 가능한 moves를 넘겨 받는다.
         ######################## Random Policy #####################
         # model = rp.Model(tmpBoard)
@@ -157,7 +142,32 @@ class Tree:
         children = []
         lenth = len(moves)
         for i in range(lenth):
+            tmpBoard2 = tmpBoard.copy()
+            tmpBoard2.push_san(moves[i])
+            if tmpBoard2.is_game_over() :
+                print("select")
+                if turn :
+                    if tmpBoard2.result() == "1-0" :
+                        policy_points[i] = 1000000
+                        print("백이 이기는 수")
+                    elif tmpBoard2.result() == "0-1":
+                        print("내가 백인데 흑이 이기는 수")
+                        continue
+                    elif tmpBoard2.result() == "1/2-1/2":
+                        print("백 : 비김")
+                else :
+                    if tmpBoard2.result() == "1-0" :
+                        print("내가 흑인데 백이 이기는 수")
+                        continue
+                    elif tmpBoard2.result() == "0-1":
+                        print("흑이 이기는 수")
+                        policy_points[i] = 1000000
+                    elif tmpBoard2.result() == "1/2-1/2":
+                        print("흑 : 비김")
+
+
             child = Node.Node(self.currentNode, moves[i], policy_points[i])
+
             child.set_Color(not self.board_stack.get_Color())
             children.append(child)
         self.currentNode.set_Child(children)
@@ -165,21 +175,6 @@ class Tree:
         self.currentNode.on_Flag()
 
     # rollout
-    def make_policyNextRandomChildIndex(self, board):
-        children = []
-        tmpNode = Node.Node(parent=None, command=None)
-        tmpNode.set_Child(children)
-        distribution = tmpNode.get_policyDistribution()
-        flag = 0
-        index = 0
-        rand_num = rand.random()
-        for i in distribution:
-            if flag <= rand_num < flag+i:
-                return index
-            else:
-                index += 1
-                flag += i
-
     def make_policyNextRandomChildBoard(self, board):
         tmpBoard = board.copy()
         turn = tmpBoard.turn
@@ -192,6 +187,29 @@ class Tree:
         tmpNode = Node.Node(parent=None, command=None)
         lenth = len(moves)
         for i in range(lenth):
+            tmpBoard2 = tmpBoard.copy()
+            tmpBoard2.push_san(moves[i])
+            if tmpBoard2.is_game_over():
+                print("simul")
+                if turn:
+                    if tmpBoard2.result() == "1-0":
+                        policy_points[i] = 1000000
+                        print("백이 이기는 수")
+                    elif tmpBoard2.result() == "0-1":
+                        print("내가 백인데 흑이 이기는 수")
+                        continue
+                    elif tmpBoard2.result() == "1/2-1/2":
+                        print("백 : 비김")
+                else:
+                    if tmpBoard2.result() == "1-0":
+                        print("내가 흑인데 백이 이기는 수")
+                        continue
+                    elif tmpBoard2.result() == "0-1":
+                        print("흑이 이기는 수")
+                        policy_points[i] = 1000000
+                    elif tmpBoard2.result() == "1/2-1/2":
+                        print("흑 : 비김")
+
             child = Node.Node(tmpNode, moves[i], policy_points[i])
             child.set_Color(turn)
             children.append(child)
@@ -249,13 +267,16 @@ class Tree:
 #
 #
 # tmpBoard = chess.Board()
-# pm = []
-# while True:
-#     pm.append(UM.policy_model())
 #
-#     policy_points, moves =pm.pop().ask_Scores(tmpBoard)
+# um = UM.policy_model()
 #
-#     print(policy_points,moves)
+# policy_points, moves =um.ask_Scores(tmpBoard)
 #
-#     print(sum(policy_points))
-#     print(len(moves))
+# print(policy_points,moves)
+# tmpBoard.push_san("e3")
+# policy_points, moves =um.ask_Scores(tmpBoard)
+#
+# print(policy_points,moves)
+#
+# print(sum(policy_points))
+# print(len(moves))

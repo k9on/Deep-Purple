@@ -43,13 +43,13 @@ def model(X, w, w2, w3, w4, w_o, p_keep_conv, p_keep_hidden):
 
 ld = LD.pgn_reader('./test/test2.pgn')
 
-index, input, output,routput, r = ld.get_data()
+index, input, output, r = ld.get_data()
 input = np.reshape(input,[-1,8,8,13])
 
 print(index[0])
 print(input[0])
-print(output)
-print(routput)
+print(output[0])
+
 trainX = input
 trainY = output
 trX = trainX

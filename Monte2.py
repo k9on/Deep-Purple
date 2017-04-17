@@ -15,19 +15,22 @@ import chess
 import randPolicy as rp
 import GetBoardString as GBS
 class Monte:
-    def __init__(self,board_str,turn = True, repeat_num = 1, select_depth = 10, simulation_num = 1,expend_point = 5):
-        self.tree = TR.Tree(board_str)  # 트리 생성
+    def __init__(self, repeat_num = 10, select_depth = 100, simulation_num = 1,expend_point = 5):
+        self.tree = TR.Tree()  # 트리 생성
         # self.turn = self.tree.get_CurrentNode().get_Color()  # 처음 차례 # 본 모듈은 항상 백 입장이라 가정하고 수행
         self.expand_point = expend_point  # 확장 기준값
         self.select_depth = select_depth  # 선택을 종료할 깊이
         self.repeat_num = repeat_num  # 반복 수행할 횟수
         self.simulation_num = simulation_num
-        self.turn = turn
+        self.turn = None
 
+    def set_state(self,board_str, turn = True):
+        self.tree.reset_board(board_str)
+        self.turn = turn
 
     def predict(self):
         for i in range(self.repeat_num):
-            #print(i, "번쨰 탐색")
+            print(i, "번쨰 탐색")
 
             self.tree.go_root()
             depth = 0
@@ -104,18 +107,18 @@ class Monte:
             return False
 
     def simulation(self):
-        print("simulation")
+        #print("simulation")
 
         tmpBoard = self.tree.get_currentBoard().copy()
 
         simul_count = 0
         while not tmpBoard.is_game_over():
             simul_count += 1
-            print(simul_count)
+            #print(simul_count)
             tmpBoard = self.tree.make_policyNextRandomChildBoard(tmpBoard)
             # print(tmpBoard.turn)
-            #print("--------------------------------------")
-            #print(tmpBoard)
+            print("--------------------------------------")
+            print(tmpBoard)
             # print(tmpBoard.is_game_over())
         result = tmpBoard.result()
         return result

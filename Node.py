@@ -180,6 +180,7 @@ class Node:
         lenth = len(self.child)
         max = -1
         index = 0
+
         for i in range(lenth):
             if max < self.child[i].visit:
                 max = self.child[i].visit

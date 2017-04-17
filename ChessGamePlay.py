@@ -30,20 +30,21 @@ def selectMode():
     print("AI의 흑백 선택")
 
 def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정해야함
+    monte = M.Monte()
     while(True):
         print("a b c d e f g h")
         print("---------------")
         print(MainBoard,chr(13))
         print("---------------")
         print("a b c d e f g h")
-        monte = M.Monte()
+
         #print(board.turn) # true 는 white false 는 black
         if (MainBoard.turn):
-
+            print(MainBoard.legal_moves)
             choice = input("choide:")
         else :
             gbs = GBS.GetBoardString().get_BoardString(MainBoard)
-
+            monte.set_state(gbs, MainBoard.turn)
 
 
             choice = monte.predict()
