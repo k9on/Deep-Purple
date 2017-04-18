@@ -208,7 +208,10 @@ class pgn_reader:
             gns, result = self.get_game(self.gs[i])
             if len(gns) < 2:
                 continue
-            rand = 2#random.randint(1,len(gns)-1)
+            try:
+                rand = random.randint(1,len(gns)-1)
+            except IndexError:
+                continue
             parent = gns[rand][1].board()
             move = gns[rand - 1][1].move
 

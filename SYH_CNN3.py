@@ -5,16 +5,11 @@ import numpy as np
 def init_weights(shape):
     return tf.Variable(tf.random_normal(shape, stddev=0.01))
 
-def model(X, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden):
+def model(X, w, w5, w_o, p_keep_conv, p_keep_hidden):
     l1 = tf.nn.relu(tf.nn.conv2d(X, w,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
-    # l2 = tf.nn.relu(tf.nn.conv2d(l1, w2,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
-    # l3 = tf.nn.relu(tf.nn.conv2d(l2, w3,strides=[1, 1, 1, 1], padding='SAME')) # 8 8 31
-    # l4 = tf.nn.relu(tf.nn.conv2d(l3, w4, strides=[1, 1, 1, 1], padding='SAME'))  # 8 8 31
-    l4 = tf.reshape(l1, [-1, w5.get_shape().as_list()[0]])
-    l5 = tf.nn.relu(tf.matmul(l4, w5))
-
+    l1 = tf.reshape(l1, [-1, w5.get_shape().as_list()[0]])
+    l5 = tf.nn.relu(tf.matmul(l1, w5))
     pyx = tf.matmul(l5, w_o)
-    print(pyx)
     return pyx
 
 def play():
@@ -48,17 +43,17 @@ def play():
     Y = tf.placeholder("float", [None, 8, 8, 13])
 
     w = init_weights([4, 4, 13, 20])      # 4x4x13 conv 81 outputs
-    w2 = init_weights([2, 2, 81, 81])     # 2x2x81 conv, 81 outputs
-    w3 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
-    w4 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
-    w5 = init_weights([8*8*20, 1000])    # 81 필터에 8*8 이미지
-    w_o = init_weights([1000, 1])         # FC 625 inputs, 4 outputs (labels)
+    # w2 = init_weights([2, 2, 81, 81])     # 2x2x81 conv, 81 outputs
+    # w3 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
+    # w4 = init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
+    w5 = init_weights([8*8*20, 100])    # 81 필터에 8*8 이미지
+    w_o = init_weights([100, 1])         # FC 625 inputs, 4 outputs (labels)
 
     p_keep_conv = tf.placeholder("float")
     p_keep_hidden = tf.placeholder("float")
 
-    py_x = model(X, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden)
-    py_y = model(Y, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden)
+    py_x = model(X, w, w5, w_o, p_keep_conv, p_keep_hidden)
+    py_y = model(Y, w, w5, w_o, p_keep_conv, p_keep_hidden)
     cost_ = py_x  - 10 - py_y
     cost_a = tf.square(cost_)
 
@@ -85,10 +80,9 @@ def play():
         print(sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.}))
         print(sess.run(py_y, feed_dict={Y: trY, p_keep_conv: 1., p_keep_hidden: 1.}))
         print(len(trX))
-        print(sess.run(w2))
         #save_path = saver.save(sess, modelname)
         print(sess.run(py_y, feed_dict={Y: trX[1:3], p_keep_conv: 1., p_keep_hidden: 1.}))
 
         return sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.})
 
-#play()
+# play()

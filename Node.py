@@ -17,22 +17,12 @@ class Node:
         self.child = []  # 자식 노드
         self.parent = parent  # 부모노드
         self.bear_Flag = False
-        self.Cpuct = 300
+        self.Cpuct = 3
 
     def set_Child(self,child):
         self.child = child
-
     def set_Color(self,color):
         self.color = color
-
-    def compute_Score(self): #Node의 점수를 계산한다.
-        self.score = float(self.win) / (self.win + self.draw + self.lose)
-
-    def full_Visit(self, visit):
-        if self.visit == visit:
-            return True
-        else :
-            return False
 
     def get_Score(self):
         return self.score
@@ -55,7 +45,6 @@ class Node:
 
     def on_Flag(self):
         self.bear_Flag = True
-
     def off_Flag(self):
         self.bear_Flag = False
 
@@ -70,18 +59,15 @@ class Node:
     def add_ChildNode(self, node):
         self.child.append(node)
 
-    def get_AllChild(self):  # 모든 자식 노드를 반환
-        if self.bear_Flag == False:
-            return -1
-        elif len(self.child) == 0:
-            return 0
-        else:
-            return self.child
-
     def calc_selectingScore(self):
         #win/games + C_puct * policy_Score * ( root( sigma(other child visit) / ( 1 + my visit ) )
-        score = self.win/(1+ self.win+self.draw+self.lose) + self.Cpuct * self.policy_Score * math.sqrt(self.sum_otherVisit()+1) / (1 + self.visit)
+        score =  self.calc_Q() + self.calc_u()
         return score
+    def calc_Q(self):
+        return self.win/( 1 + self.win+self.draw+self.lose)
+    def calc_u(self):
+        return self.Cpuct * self.policy_Score * math.sqrt(self.sum_otherVisit()+1) / (1 + self.visit)
+
 
     def sum_otherVisit(self):
         sumAll = self.parent.sum_childVisit()
@@ -117,8 +103,6 @@ class Node:
             #print(max)
             return self.child[choice]
 
-    def visited(self):
-        self.visit += 1
 
     def should_expand(self, point):
         if self.visit == point:
@@ -142,32 +126,21 @@ class Node:
 
         return scores
 
-    def get_bestPolicyScoreChildIndex(self):
-        scores = self.get_policyDistribution()
-        max = -1000
-        index = -1
-        for i in range(len(scores)):
-            if max > scores[i]:
-                max = scores[i]
-                index = i
-        return index
 
     def renew_result(self, result):
         ba = BA.Board2Array()
         result = ba.trans_result(result)
 
-
         if result == 1:  # 백승
             if not self.color:
                 self.add_Win(1)
-
             else:
                 self.add_Lose(1)
-
+            return
 
         elif result == 0:  # 무승부
             self.add_Draw(1)
-
+            return
 
         elif result == -1:  # 흑승
             if not self.color:
@@ -175,7 +148,7 @@ class Node:
 
             else:
                 self.add_Win(1)
-
+            return
         else:
             print("result is not formal")
 
@@ -203,3 +176,29 @@ class Node:
         for i in range(lenth):
             print(i,"> win:", self.child[i].win, "loss:", self.child[i].lose, "draw:", self.child[i].draw, "command:", self.child[i].command, self.child[i].visit)
             print(self.child[i].calc_selectingScore())
+            print("ps : ",self.child[i].policy_Score)
+            print("q : ",self.child[i].calc_Q())
+            print("u : ",self.child[i].calc_u())
+
+
+    #
+    # def get_bestPolicyScoreChildIndex(self):
+    #     scores = self.get_policyDistribution()
+    #     max = -1000
+    #     index = -1
+    #     for i in range(len(scores)):
+    #         if max > scores[i]:
+    #             max = scores[i]
+    #             index = i
+    #     return index
+
+    # def get_AllChild(self):  # 모든 자식 노드를 반환
+    #     if self.bear_Flag == False:
+    #         return -1
+    #     elif len(self.child) == 0:
+    #         return 0
+    #     else:
+    #         return self.child
+    #
+    # def visited(self):
+    #     self.visit += 1
