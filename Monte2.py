@@ -15,7 +15,7 @@ import chess
 import randPolicy as rp
 import GetBoardString as GBS
 class Monte:
-    def __init__(self, repeat_num = 10, select_depth = 100, simulation_num = 1,expend_point = 5):
+    def __init__(self, repeat_num = 100, select_depth = 30, simulation_num = 1,expend_point = 5):
         self.tree = TR.Tree()  # 트리 생성
         # self.turn = self.tree.get_CurrentNode().get_Color()  # 처음 차례 # 본 모듈은 항상 백 입장이라 가정하고 수행
         self.expand_point = expend_point  # 확장 기준값
@@ -49,7 +49,7 @@ class Monte:
                 #print(result)
 
             # backpropagation
-            result = self.change_Result(result)
+            #result = self.change_Result(result)
             self.backpropagation(result)
 
         # choice
@@ -68,6 +68,11 @@ class Monte:
         return result
 
     def selection(self, depth):
+        print(depth)
+        # print(self.tree.get_currentBoard().legal_moves)
+        # print(self.tree.currentNode.command)
+        # print(self.tree.get_currentBoard())
+        # print("---------------------------")
         if depth%2 == 0:  # 내차례, 내 차례는 항상 흰색이라 가정
             flip = False
         else:  # 적차례
@@ -81,16 +86,21 @@ class Monte:
                 if not self.tree.currentNode.get_Flag():  # 자식노드 체크
                     # 자식 노드 생성
                     self.tree.make_policyNextChildren(flip)
+                # self.tree.currentNode.print_childInfo()
                 # 다음 노드로
                 self.tree.go_next()
+
                 return self.selection(depth+1) * 1
 
             else:  # 깊이 기준을 초과하였다면
                 if self.tree.currentNode.get_Flag(): # 자식이 있으면 자식으로
                     print("자식있음")
+                    # self.tree.currentNode.print_childInfo()
                     self.tree.go_next()
                     return self.selection(depth+1) * 1
+
                 else:  # 자식이 없다면 이제 끝
+                    # self.tree.currentNode.print_childInfo()
                     return 1
 
     def expantion(self):
@@ -114,13 +124,15 @@ class Monte:
         simul_count = 0
         while not tmpBoard.is_game_over():
             simul_count += 1
-            #print(simul_count)
+            print(simul_count)
             tmpBoard = self.tree.make_policyNextRandomChildBoard(tmpBoard)
             # print(tmpBoard.turn)
-            print("--------------------------------------")
-            print(tmpBoard)
+            # print("--------------------------------------")
+            #print(tmpBoard)
             # print(tmpBoard.is_game_over())
+        print(tmpBoard)
         result = tmpBoard.result()
+
         return result
 
     def backpropagation(self, result):

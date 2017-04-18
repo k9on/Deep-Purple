@@ -17,7 +17,7 @@ class Node:
         self.child = []  # 자식 노드
         self.parent = parent  # 부모노드
         self.bear_Flag = False
-        self.Cpuct = 3
+        self.Cpuct = 300
 
     def set_Child(self,child):
         self.child = child
@@ -80,7 +80,7 @@ class Node:
 
     def calc_selectingScore(self):
         #win/games + C_puct * policy_Score * ( root( sigma(other child visit) / ( 1 + my visit ) )
-        score = self.win/(1+ self.win+self.draw+self.lose) + self.Cpuct * self.policy_Score * math.sqrt(self.sum_otherVisit() / (1 + self.visit))
+        score = self.win/(1+ self.win+self.draw+self.lose) + self.Cpuct * self.policy_Score * math.sqrt(self.sum_otherVisit()+1) / (1 + self.visit)
         return score
 
     def sum_otherVisit(self):
@@ -104,15 +104,18 @@ class Node:
                 max = self.child[i].calc_selectingScore()
                 index = i
                 candidates.clear()
+                candidates.append(i)
 
             elif max == self.child[i].calc_selectingScore():
                 candidates.append(i)
-        choice = index
+
         if len(candidates) != 0:
+            #print(max)
+            return self.child[index]
+        else :
             choice = random.choice(candidates)
-
-        return self.child[choice]
-
+            #print(max)
+            return self.child[choice]
 
     def visited(self):
         self.visit += 1
@@ -157,22 +160,22 @@ class Node:
         if result == 1:  # 백승
             if not self.color:
                 self.add_Win(1)
-                #print("백 win1")
+
             else:
                 self.add_Lose(1)
-                #print("백 win2")
+
 
         elif result == 0:  # 무승부
             self.add_Draw(1)
-            #print("draw")
+
 
         elif result == -1:  # 흑승
             if not self.color:
                 self.add_Lose(1)
-                #print("흑 win1")
+
             else:
                 self.add_Win(1)
-                #print("흑 win2")
+
         else:
             print("result is not formal")
 
@@ -196,5 +199,7 @@ class Node:
 
     def print_childInfo(self):
         lenth = len(self.child)
-        #for i in range(lenth):
-            #print(i,"> win:", self.child[i].win, "loss:", self.child[i].lose, "draw:", self.child[i].draw, "command:", self.child[i].command, self.child[i].visit)
+        print("child")
+        for i in range(lenth):
+            print(i,"> win:", self.child[i].win, "loss:", self.child[i].lose, "draw:", self.child[i].draw, "command:", self.child[i].command, self.child[i].visit)
+            print(self.child[i].calc_selectingScore())

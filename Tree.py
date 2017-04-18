@@ -146,6 +146,7 @@ class Tree:
             tmpBoard2.push_san(moves[i])
             if tmpBoard2.is_game_over() :
                 print("select")
+                print(tmpBoard)
                 if turn :
                     if tmpBoard2.result() == "1-0" :
                         policy_points[i] = 1000000
@@ -154,7 +155,10 @@ class Tree:
                         print("내가 백인데 흑이 이기는 수")
                         continue
                     elif tmpBoard2.result() == "1/2-1/2":
+                        if self.check_board(tmpBoard2):
+                            continue
                         print("백 : 비김")
+                        print(tmpBoard2)
                 else :
                     if tmpBoard2.result() == "1-0" :
                         print("내가 흑인데 백이 이기는 수")
@@ -163,7 +167,11 @@ class Tree:
                         print("흑이 이기는 수")
                         policy_points[i] = 1000000
                     elif tmpBoard2.result() == "1/2-1/2":
+                        if self.check_board(tmpBoard2):
+                            continue
                         print("흑 : 비김")
+                        print(tmpBoard2)
+
 
 
             child = Node.Node(self.currentNode, moves[i], policy_points[i])
@@ -199,6 +207,8 @@ class Tree:
                         print("내가 백인데 흑이 이기는 수")
                         continue
                     elif tmpBoard2.result() == "1/2-1/2":
+                        if self.check_board(tmpBoard2):
+                            continue
                         print("백 : 비김")
                 else:
                     if tmpBoard2.result() == "1-0":
@@ -208,13 +218,18 @@ class Tree:
                         print("흑이 이기는 수")
                         policy_points[i] = 1000000
                     elif tmpBoard2.result() == "1/2-1/2":
+                        if self.check_board(tmpBoard2):
+                            continue
                         print("흑 : 비김")
 
             child = Node.Node(tmpNode, moves[i], policy_points[i])
             child.set_Color(turn)
             children.append(child)
+
         tmpNode.set_Child(children)
         distribution = tmpNode.get_policyDistribution()
+        #tmpNode.print_childInfo()
+        #print(distribution)
         flag = 0
         index = 0
         rand_num = rand.random()
@@ -224,7 +239,12 @@ class Tree:
             else:
                 index += 1
                 flag += i
-        childcommand = tmpNode.child[index].command
+        try :
+            childcommand = tmpNode.child[index].command
+        except IndexError:
+            childcommand = rand.choice(moves)
+        #print(childcommand)
+
         tmpBoard.push_san(childcommand)
         return tmpBoard
 
@@ -248,9 +268,26 @@ class Tree:
     def get_currentBoard(self):
         return self.board_stack.get_ChessBoard()
 
+    def check_board(self,board):
+        flag = False
+        if board.can_claim_threefold_repetition():
+            flag = True
+        if board.can_claim_fifty_moves():
+            flag = True
+        if board.can_claim_draw():
+            flag = True
+
+        if board.is_fivefold_repetition():
+            flag = True
+
+        if board.is_seventyfive_moves():
+            flag = True
+        return flag
 
 
-# def init_weights(shape):
+
+
+        # def init_weights(shape):
 #     return tf.Variable(tf.random_normal(shape, stddev=0.01))
 
 
