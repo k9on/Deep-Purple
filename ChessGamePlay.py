@@ -40,13 +40,21 @@ def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정�
 
         #print(board.turn) # true 는 white false 는 black
         if (MainBoard.turn):
-            print(MainBoard.legal_moves)
-            choice = input("choide:")
+            flag = True
+            while flag:
+                print(MainBoard.legal_moves)
+                choice = input("choice:")
+                if choice != 0:
+                    tmpBoard = MainBoard.copy()
+                    try:
+                        tmpBoard.push_san(choice)
+                        flag = False
+                    except ValueError:
+                        print("다시 선택해주세요")
+
         else :
             gbs = GBS.GetBoardString().get_BoardString(MainBoard)
             monte.set_state(gbs, MainBoard.turn)
-
-
             choice = monte.predict()
 
         if (choice == "0") :
@@ -55,19 +63,6 @@ def play() : # 게임 모드에 따라 유동적으로 작동해야함 # 수정�
         else :
             print("\r")
             MainBoard.push_san(choice)
-
-
-#############################
-###### 단 순 U I  구성 ######
-def UI_Intro() :
-    print("WelCome DeepPurple")
-
-def UI_start() :
-    print("Press any Key to continue")
-
-###### 단 순 U I  구성 ######
-#############################
-
 
 
 # 소스 구동

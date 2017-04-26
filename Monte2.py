@@ -32,7 +32,7 @@ class Monte:
         for i in range(self.repeat_num):
             print(i, "번쨰 탐색")
 
-            self.tree.go_root()
+            #self.tree.go_root()
             depth = 0
 
             # selection
@@ -41,42 +41,32 @@ class Monte:
             if result_selection != 0: # 선택에서 게임이 끝나지 않앗으면 확장과 시뮬레이션
                 # expantion
                 result = self.expantion()
+
                 if not result :
                     # simulation
                     result = self.simulation()
             else :
                 result = self.tree.get_Result()
-                #print(result)
+
 
             # backpropagation
-            #result = self.change_Result(result)
+
             self.backpropagation(result)
 
         # choice
         choice = self.choice()
         return choice
 
-    def change_Result(self, result):
-        if self.turn :
-            return result
-        else :
-            if result == "1-0":
-                return "0-1"
-            elif result == "0-1":
-                return "1-0"
-            else : return result
-        return result
-
     def selection(self, depth):
-        print(depth)
+        #print(depth)
         # print(self.tree.get_currentBoard().legal_moves)
         # print(self.tree.currentNode.command)
         # print(self.tree.get_currentBoard())
         # print("---------------------------")
-        if depth%2 == 0:  # 내차례, 내 차례는 항상 흰색이라 가정
-            flip = False
-        else:  # 적차례
-            flip = True
+        # if depth%2 == 0:  # 내차례, 내 차례는 항상 흰색이라 가정
+        #     flip = False
+        # else:  # 적차례
+        #     flip = True
             
         if self.tree.get_GameOver():  # 보드가 게임이 끝난 상태라면 ( 흰승 : 1, 검은승 : -1, 무: 0
             return 0
@@ -85,7 +75,7 @@ class Monte:
             if self.select_depth > depth:  # select해야할 깊이라면
                 if not self.tree.currentNode.get_Flag():  # 자식노드 체크
                     # 자식 노드 생성
-                    self.tree.make_policyNextChildren(flip)
+                    self.tree.make_policyNextChildren()
                 # self.tree.currentNode.print_childInfo()
                 # 다음 노드로
                 self.tree.go_next()
@@ -120,16 +110,16 @@ class Monte:
         #print("simulation")
 
         tmpBoard = self.tree.get_currentBoard().copy()
-
         simul_count = 0
+
         while not tmpBoard.is_game_over():
             simul_count += 1
-            print(simul_count)
+            #print(simul_count)
             tmpBoard = self.tree.make_policyNextRandomChildBoard(tmpBoard)
-            # print(tmpBoard.turn)
+
             # print("--------------------------------------")
             #print(tmpBoard)
-            # print(tmpBoard.is_game_over())
+
         print(tmpBoard)
         result = tmpBoard.result()
 
@@ -149,3 +139,14 @@ class Monte:
         self.tree.currentNode.print_childInfo()
         return root.child[index].command
 
+
+    # def change_Result(self, result):
+    #     if self.turn :
+    #         return result
+    #     else :
+    #         if result == "1-0":
+    #             return "0-1"
+    #         elif result == "0-1":
+    #             return "1-0"
+    #         else : return result
+    #     return result

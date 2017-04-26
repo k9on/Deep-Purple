@@ -18,7 +18,7 @@ def model(X, w, w2, w3, w4,w5, w_o, p_keep_conv, p_keep_hidden):
     return pyx
 
 def play():
-    ld = LD.pgn_reader('./test/test.pgn')
+    ld = LD.pgn_reader('./test/test4.pgn')
 
     index, pboard, board, rboard, result = ld.get_data()
     print(index)
@@ -75,13 +75,13 @@ def play():
         tf.global_variables_initializer().run()
         saver.restore(sess, modelname)
         print(sess.run(w))
-        # for i in range(10000):
-        #     #print(a)
-        #     sess.run(train_op, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5})
-        #     print (i,sess.run(cost, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5}))
-        #     if i%200 == 0:
-        #         print("Saved!!!!")
-        #         save_path = saver.save(sess, modelname)
+        for i in range(10000):
+            #print(a)
+            sess.run(train_op, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5})
+            print (i,sess.run(cost, feed_dict={X: trX, Y: trY, p_keep_conv: 0.8, p_keep_hidden: 0.5}))
+            if i%200 == 0:
+                print("Saved!!!!")
+                save_path = saver.save(sess, modelname)
         print(sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.}))
         print(sess.run(py_y, feed_dict={Y: trY, p_keep_conv: 1., p_keep_hidden: 1.}))
         print(len(trX))
@@ -91,4 +91,4 @@ def play():
 
         return sess.run(py_x, feed_dict={X:trX,p_keep_conv: 1., p_keep_hidden: 1.})
 
-play()
+#play()
