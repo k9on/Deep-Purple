@@ -1,3 +1,4 @@
+import tensorflow as tf
 import chess
 #
 # b= chess.Board()
@@ -15,6 +16,11 @@ import chess
 # print(b)
 # print(b.is_game_over())
 # print(b.legal_moves)
-# print(b.result())
-while True:
-    print("\r","1", chr(13))
+# # print(b.result())
+# while True:
+#     print("\r","1", chr(13))
+
+with tf.variable_scope("12") as scope :
+    print("asdasd")
+    scope.reuse_variables()
+    print("adsasdasdasd")

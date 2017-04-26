@@ -15,11 +15,11 @@ class policy_model:
     def __init__(self):
         self.ba = BA.Board2Array()
         self.w = self.init_weights([4, 4, 13, 20])      # 4x4x13 conv 81 outputs
-        self.w2 = self.init_weights([2, 2, 81, 81])     # 2x2x81 conv, 81 outputs
+        self.w2 = self.init_weights([2, 2, 81, 1])     # 2x2x81 conv, 81 outputs
         self.w3 = self.init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
         self.w4 = self.init_weights([2, 2, 81, 81])    # 2x2x81 conv, 81 outputs
-        self.w5 = self.init_weights([8*8*20, 1000])    # 81 필터에 8*8 이미지
-        self.w_o = self.init_weights([1000, 1])         # FC 625 inputs, 4 outputs (labels)
+        self.w5 = self.init_weights([8*8*20, 100])    # 81 필터에 8*8 이미지
+        self.w_o = self.init_weights([100, 1])         # FC 625 inputs, 4 outputs (labels)
 
         self.p_keep_conv = tf.placeholder("float")
         self.p_keep_hidden = tf.placeholder("float")
